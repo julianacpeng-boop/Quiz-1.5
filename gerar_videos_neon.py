@@ -46,97 +46,126 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 # ============================================================
 
 QUIZZES = {
-    "Menstruação": [
+    "Anticoncepcional": [
         {
-            "pergunta": "Qual nome é dado à primeira menstruação da vida?",
+            "pergunta": "Qual método contraceptivo também ajuda a reduzir o risco de ISTs?",
             "alternativas": [
-                "Ovulação",
-                "Menarca",
-                "Menopausa"
+                "DIU",
+                "Preservativo",
+                "Pílula anticoncepcional"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Durante a menstruação, o sangue vem principalmente de qual parte do corpo?",
+            "pergunta": "O que pode acontecer se a pílula anticoncepcional for esquecida?",
             "alternativas": [
-                "Do útero",
-                "Dos rins",
-                "Do intestino"
+                "A proteção pode diminuir",
+                "Ela passa a proteger por mais tempo",
+                "Nada muda em nenhuma situação"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Cólica menstrual costuma estar relacionada à contração de qual órgão?",
+            "pergunta": "Qual destes é um método contraceptivo de longa duração?",
             "alternativas": [
-                "Pulmão",
-                "Estômago",
-                "Útero"
+                "Tabelinha",
+                "Coito interrompido",
+                "DIU"
             ],
             "correta": 2
         },
     ],
 
-    "Gravidez": [
+    "Sono": [
         {
-            "pergunta": "Como se chama o período aproximado de desenvolvimento do bebê antes do nascimento?",
+            "pergunta": "Em qual fase do sono os sonhos mais vívidos costumam acontecer?",
             "alternativas": [
-                "Gestação",
-                "Puberdade",
-                "Ovulação"
+                "Sono REM",
+                "Apenas no início do sono",
+                "Somente ao acordar"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Qual nome recebe o bebê em desenvolvimento nas primeiras semanas de gravidez?",
+            "pergunta": "Qual hormônio ajuda a regular o sono?",
             "alternativas": [
-                "Embrião",
-                "Gameta",
-                "Placenta"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Qual exame é muito usado para acompanhar o bebê dentro do útero?",
-            "alternativas": [
-                "Endoscopia",
-                "Ultrassonografia",
-                "Raio-x dentário"
+                "Insulina",
+                "Melatonina",
+                "Adrenalina"
             ],
             "correta": 1
+        },
+        {
+            "pergunta": "Dormir pouco por vários dias pode prejudicar principalmente o quê?",
+            "alternativas": [
+                "Apenas a cor dos olhos",
+                "O crescimento das unhas",
+                "Atenção e memória"
+            ],
+            "correta": 2
         },
     ],
 
-    "Vacina": [
+    "Cérebro e emoções": [
         {
-            "pergunta": "Qual é a principal função de uma vacina?",
+            "pergunta": "Qual estrutura cerebral está bastante ligada ao medo?",
             "alternativas": [
-                "Estimular o sistema imunológico a reconhecer um agente",
-                "Substituir todos os medicamentos",
-                "Curar qualquer doença imediatamente"
+                "Amígdala",
+                "Retina",
+                "Pulmão"
             ],
             "correta": 0
         },
         {
-            "pergunta": "As vacinas utilizam sempre a mesma tecnologia para gerar proteção?",
+            "pergunta": "Qual substância é bastante associada à sensação de recompensa e prazer?",
             "alternativas": [
-                "Sim, todas são idênticas",
-                "Não, existem diferentes tecnologias de vacinas",
-                "Somente vacinas infantis usam tecnologias diferentes"
+                "Hemoglobina",
+                "Dopamina",
+                "Queratina"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Qual resposta o organismo pode desenvolver após a vacinação?",
+            "pergunta": "Qual parte do cérebro participa do planejamento e da tomada de decisões?",
             "alternativas": [
-                "Perda permanente da visão",
-                "Fratura óssea",
-                "Memória imunológica"
+                "Medula óssea",
+                "Ouvido médio",
+                "Córtex pré-frontal"
             ],
             "correta": 2
+        },
+    ],
+
+    "Primeiros socorros": [
+        {
+            "pergunta": "Em caso de queimadura leve, qual atitude inicial é adequada?",
+            "alternativas": [
+                "Colocar gelo diretamente",
+                "Resfriar com água corrente",
+                "Passar pasta de dente"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Ao encontrar uma pessoa inconsciente, uma das primeiras atitudes é:",
+            "alternativas": [
+                "Oferecer água",
+                "Verificar se ela responde e respira",
+                "Colocá-la em pé"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Em um sangramento externo importante, o que pode ajudar?",
+            "alternativas": [
+                "Fazer pressão direta sobre o local",
+                "Assoprar o ferimento",
+                "Jogar álcool imediatamente"
+            ],
+            "correta": 0
         },
     ],
 }
-
 # Imagens colocadas automaticamente no modo 2.
 # Salve esses arquivos na pasta "imagens_temas" do repositório.
 TEMA_IMAGENS = {
