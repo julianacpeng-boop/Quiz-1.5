@@ -133,36 +133,94 @@ QUIZZES = {
                 "Córtex pré-frontal"
             ],
             "correta": 2
+QUIZZES = {
+    "Por que a gente se apaixona?": [
+        {
+            "pergunta": "Qual substância é bastante associada à sensação de prazer e recompensa no cérebro?",
+            "alternativas": [
+                "Dopamina",
+                "Queratina",
+                "Hemoglobina"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Quando alguém apaixonado pensa muito na pessoa, isso pode estar ligado a qual fator?",
+            "alternativas": [
+                "Apenas fome",
+                "Alterações em áreas cerebrais ligadas à emoção",
+                "Crescimento das unhas"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Qual destas sensações pode acontecer quando a pessoa vê alguém por quem está apaixonada?",
+            "alternativas": [
+                "Coração acelerar",
+                "A cor dos olhos mudar",
+                "A voz desaparecer para sempre"
+            ],
+            "correta": 0
         },
     ],
 
-    "Primeiros socorros": [
+    "Seu corpo dá sinais antes de você perceber?": [
         {
-            "pergunta": "Em caso de queimadura leve, qual atitude inicial é adequada?",
+            "pergunta": "Qual pode ser um sinal físico comum de estresse ou ansiedade?",
             "alternativas": [
-                "Colocar gelo diretamente",
-                "Resfriar com água corrente",
-                "Passar pasta de dente"
+                "Cabelo ficar azul",
+                "Coração acelerado",
+                "Crescimento repentino dos dentes"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Ao encontrar uma pessoa inconsciente, uma das primeiras atitudes é:",
+            "pergunta": "Sentir muita sede pode ser um sinal de quê?",
             "alternativas": [
-                "Oferecer água",
-                "Verificar se ela responde e respira",
-                "Colocá-la em pé"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Em um sangramento externo importante, o que pode ajudar?",
-            "alternativas": [
-                "Fazer pressão direta sobre o local",
-                "Assoprar o ferimento",
-                "Jogar álcool imediatamente"
+                "Possível desidratação",
+                "Sono profundo",
+                "Aumento da altura"
             ],
             "correta": 0
+        },
+        {
+            "pergunta": "O corpo pode demonstrar cansaço excessivo de qual forma?",
+            "alternativas": [
+                "Mais bocejos e dificuldade de atenção",
+                "Mudança no tipo sanguíneo",
+                "Aumento automático da memória"
+            ],
+            "correta": 0
+        },
+    ],
+
+    "Coisas estranhas que o cérebro faz": [
+        {
+            "pergunta": "Como se chama a sensação de parecer que você já viveu uma situação antes?",
+            "alternativas": [
+                "Insônia",
+                "Déjà vu",
+                "Reflexo involuntário"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "O que é uma memória falsa?",
+            "alternativas": [
+                "Uma lembrança que a pessoa acredita ser real, mas está distorcida",
+                "Uma memória apagada do celular",
+                "Uma lembrança que só aparece dormindo"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Quando a pessoa dá branco na hora de falar, isso pode acontecer por quê?",
+            "alternativas": [
+                "Porque o cérebro desligou permanentemente",
+                "Porque toda memória foi perdida",
+                "Porque ansiedade ou pressão podem atrapalhar o acesso à informação"
+            ],
+            "correta": 2
         },
     ],
 }
