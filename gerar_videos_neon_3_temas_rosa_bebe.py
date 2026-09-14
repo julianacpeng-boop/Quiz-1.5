@@ -1,0 +1,1238 @@
+import os
+import re
+import shutil
+import subprocess
+import unicodedata
+from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+
+# ============================================================
+# JUH QUIZ NEON FLEXÍVEL — mesmo esquema de edição do Quiz-vers-o-1.3
+#
+# MODO_LAYOUT:
+#   1 = SEM imagem do tema
+#   2 = COM espaço central para a imagem do tema na INTRO
+#
+# A imagem do modo 2 aparece somente na tela de chamada do tema.
+# Você coloca a imagem real depois, no editor de vídeo.
+#
+# Fluxo:
+#   1) fala: QUANTO VOCÊ SABE SOBRE: TEMA?
+#   2) lê SOMENTE a pergunta
+#   3) contagem 3, 2, 1
+#   4) destaca a resposta correta
+#   5) lê SOMENTE a resposta correta
+# ============================================================
+
+# ============================================================
+# EDITE SOMENTE ESTA ÁREA, COMO VOCÊ JÁ FAZ NA VERSÃO 1.3
+#
+# Você pode colocar:
+# - quantos TEMAS quiser;
+# - quantas PERGUNTAS quiser dentro de cada tema.
+#
+# Cada pergunta continua com 3 alternativas:
+# correta: 0=A, 1=B, 2=C
+#
+# O programa calcula sozinho:
+# - quantidade de vídeos = quantidade de temas;
+# - quantidade de perguntas de cada vídeo;
+# - 1/3, 1/5, 1/7...
+# - "PERGUNTA 1 DE X";
+# - placar final X/X.
+# ============================================================
+
+QUIZZES = {
+    "Primeira Vez": [
+        {
+            "pergunta": "Antes de uma relação sexual, o que deve existir entre as pessoas envolvidas?",
+            "alternativas": [
+                "Consentimento livre e claro",
+                "Pressão para agradar",
+                "Medo de dizer não"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "É possível ocorrer gravidez na primeira relação sexual vaginal sem contracepção?",
+            "alternativas": [
+                "Não, nunca",
+                "Sim",
+                "Somente depois dos 30 anos"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Qual método de barreira ajuda a reduzir o risco de gravidez e de infecções sexualmente transmissíveis?",
+            "alternativas": [
+                "Analgésico",
+                "Antibiótico",
+                "Preservativo"
+            ],
+            "correta": 2
+        },
+    ],
+
+    "Menstruação": [
+        {
+            "pergunta": "Qual evento marca o primeiro dia de um novo ciclo menstrual?",
+            "alternativas": [
+                "O início do sangramento menstrual",
+                "O fim da ovulação",
+                "O aumento da temperatura corporal"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Qual tecido do útero é eliminado em parte durante a menstruação?",
+            "alternativas": [
+                "Miocárdio",
+                "Pleura",
+                "Endométrio"
+            ],
+            "correta": 2
+        },
+        {
+            "pergunta": "Qual hormônio apresenta um pico que ajuda a desencadear a ovulação?",
+            "alternativas": [
+                "Insulina",
+                "LH",
+                "Melatonina"
+            ],
+            "correta": 1
+        },
+    ],
+
+    "Vacina": [
+        {
+            "pergunta": "Qual é a principal função de uma vacina?",
+            "alternativas": [
+                "Estimular o sistema imunológico a reconhecer um agente",
+                "Substituir todos os medicamentos",
+                "Curar qualquer doença imediatamente"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "As vacinas utilizam sempre a mesma tecnologia para gerar proteção?",
+            "alternativas": [
+                "Sim, todas são idênticas",
+                "Não, existem diferentes tecnologias de vacinas",
+                "Somente vacinas infantis usam tecnologias diferentes"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Qual resposta o organismo pode desenvolver após a vacinação?",
+            "alternativas": [
+                "Perda permanente da visão",
+                "Fratura óssea",
+                "Memória imunológica"
+            ],
+            "correta": 2
+        },
+    ],
+}
+
+# ------------------------------------------------------------
+# CONFIGURAÇÃO
+# ------------------------------------------------------------
+
+TEMPO_ESCOLHA = 3
+
+# MESMA VOZ DO Quiz-vers-o-1.3
+VOZ = "pt-BR-AntonioNeural"
+VELOCIDADE_VOZ = "+10%"
+
+W = 1080
+H = 1920
+FPS = 30
+
+AUDIO_HZ = 48000
+AUDIO_CHANNELS = 2
+
+PAUSA_DEPOIS_TEMA = 0.35
+PAUSA_DEPOIS_PERGUNTA = 0.15
+PAUSA_DEPOIS_RESPOSTA = 0.55
+
+FUSO = ZoneInfo("America/Fortaleza")
+DATA_DO_DIA = datetime.now(FUSO).strftime("%Y-%m-%d")
+
+# Pode ser definido no GitHub Actions.
+MODO_LAYOUT = int(os.getenv("MODO_LAYOUT", "1").strip())
+if MODO_LAYOUT not in (1, 2):
+    raise ValueError("MODO_LAYOUT deve ser 1 (sem imagem) ou 2 (com imagem).")
+
+
+PASTA_RAIZ = Path("output_neon")
+PASTA_TMP = Path("_tmp_juhquiz_neon")
+NOME_MODO = "modo_1_sem_imagem" if MODO_LAYOUT == 1 else "modo_2_com_imagem"
+PASTA_SAIDA = PASTA_RAIZ / DATA_DO_DIA / NOME_MODO
+
+# ------------------------------------------------------------
+# PALETA — ROSA BEBÊ SÓLIDO
+# ------------------------------------------------------------
+
+BABY_PINK = (248, 207, 224)
+BABY_PINK_SOFT = (255, 231, 241)
+BABY_PINK_DARK = (238, 121, 181)
+
+NAVY = (10, 29, 90)
+NAVY_2 = (10, 29, 90)
+BLUE = (44, 124, 255)
+CYAN = (112, 231, 255)
+WHITE = (255, 253, 253)
+YELLOW = (255, 212, 71)
+ORANGE = (255, 171, 92)
+PINK = (238, 121, 181)
+PURPLE = (139, 83, 255)
+GREEN = (30, 215, 139)
+GREEN_DARK = (7, 92, 53)
+GRAY = (103, 93, 111)
+LIGHT_BLUE = (245, 249, 255)
+
+# ============================================================
+# UTILIDADES
+# ============================================================
+
+def slug(texto):
+    txt = unicodedata.normalize("NFKD", str(texto))
+    txt = "".join(c for c in txt if not unicodedata.combining(c))
+    txt = re.sub(r"[^a-zA-Z0-9]+", "-", txt).strip("-").lower()
+    return txt or "quiz"
+
+
+def executar(cmd):
+    p = subprocess.run(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+    if p.returncode != 0:
+        print(p.stdout)
+        print(p.stderr)
+        raise RuntimeError("Falha ao executar comando.")
+    return p
+
+
+def fonte(tamanho, bold=False):
+    candidatos = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold
+        else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+
+        "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf" if bold
+        else "/usr/share/fonts/truetype/liberation2/LiberationSans-Regular.ttf",
+
+        "DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf",
+    ]
+
+    for arq in candidatos:
+        try:
+            return ImageFont.truetype(arq, tamanho)
+        except Exception:
+            pass
+
+    return ImageFont.load_default()
+
+
+def gradient_vertical(size, top_color, bottom_color):
+    # Gera só uma coluna de pixels e amplia para 1080 px.
+    # É muito mais rápido do que percorrer 2 milhões de pixels em Python.
+    w, h = size
+    faixa = Image.new("RGB", (1, h))
+    dados = []
+
+    for y in range(h):
+        t = y / max(1, h - 1)
+        dados.append(tuple(
+            int(top_color[i] * (1 - t) + bottom_color[i] * t)
+            for i in range(3)
+        ))
+
+    faixa.putdata(dados)
+    return faixa.resize((w, h))
+
+
+def wrap_text(draw, texto, fnt, max_width):
+    palavras = str(texto).split()
+    linhas = []
+    atual = ""
+
+    for palavra in palavras:
+        teste = (atual + " " + palavra).strip()
+        bb = draw.textbbox((0, 0), teste, font=fnt)
+        if bb[2] - bb[0] <= max_width:
+            atual = teste
+        else:
+            if atual:
+                linhas.append(atual)
+            atual = palavra
+
+    if atual:
+        linhas.append(atual)
+
+    return linhas
+
+
+def draw_centered_text(draw, texto, y, fnt, fill, x0=60, x1=None):
+    if x1 is None:
+        x1 = W - 60
+    bb = draw.textbbox((0, 0), str(texto), font=fnt)
+    tw = bb[2] - bb[0]
+    x = x0 + ((x1 - x0) - tw) / 2
+    draw.text((x, y), str(texto), font=fnt, fill=fill)
+
+
+def draw_multiline_centered(
+    draw,
+    texto,
+    fnt,
+    y,
+    max_width,
+    fill,
+    line_gap=10,
+    center_x=W / 2
+):
+    linhas = wrap_text(draw, texto, fnt, max_width)
+
+    bb = draw.textbbox((0, 0), "Ag", font=fnt)
+    line_h = bb[3] - bb[1]
+
+    yy = y
+    for linha in linhas:
+        bb2 = draw.textbbox((0, 0), linha, font=fnt)
+        tw = bb2[2] - bb2[0]
+        draw.text((center_x - tw / 2, yy), linha, font=fnt, fill=fill)
+        yy += line_h + line_gap
+
+    return yy
+
+
+def fonte_pergunta(draw, texto, max_width=790, max_lines=4):
+    tamanhos = [54, 50, 46, 42, 38, 34]
+
+    for tam in tamanhos:
+        f = fonte(tam, True)
+        linhas = wrap_text(draw, texto, f, max_width)
+        if len(linhas) <= max_lines:
+            return f
+
+    return fonte(32, True)
+
+
+def desenhar_logo_texto(draw, modo=1):
+    if modo == 1:
+        draw_centered_text(
+            draw, "JUH QUIZ", 90, fonte(42, True),
+            WHITE, 120, W - 120
+        )
+    else:
+        # Nas perguntas: logo compacto à esquerda.
+        box = [55, 55, 275, 135]
+        draw.rounded_rectangle(
+            box, radius=28, fill=NAVY,
+            outline=(255, 242, 249), width=4
+        )
+        draw_centered_text(
+            draw, "JUH QUIZ", 76, fonte(28, True),
+            WHITE, box[0], box[2]
+        )
+
+
+def desenhar_campo_imagem_tema(draw):
+    """
+    Campo central da imagem do tema.
+    Ele aparece SOMENTE enquanto a chamada do tema está na tela.
+    """
+    x0, y0, x1, y1 = 225, 690, 855, 1240
+
+    # sombra suave
+    draw.rounded_rectangle(
+        [x0 + 12, y0 + 14, x1 + 12, y1 + 14],
+        radius=58,
+        fill=(222, 150, 184)
+    )
+
+    # quadro claro
+    draw.rounded_rectangle(
+        [x0, y0, x1, y1],
+        radius=58,
+        fill=BABY_PINK_SOFT,
+        outline=WHITE,
+        width=12
+    )
+
+    # borda rosa delicada
+    draw.rounded_rectangle(
+        [x0 + 12, y0 + 12, x1 - 12, y1 - 12],
+        radius=48,
+        outline=(244, 162, 203),
+        width=7
+    )
+
+    # ícone de espaço reservado
+    icx = W // 2
+    draw.rounded_rectangle(
+        [icx - 90, y0 + 145, icx + 90, y0 + 325],
+        radius=40,
+        outline=(190, 149, 180),
+        width=8
+    )
+
+    draw_centered_text(
+        draw,
+        "COLOQUE AQUI",
+        y0 + 370,
+        fonte(32, True),
+        NAVY,
+        x0 + 35,
+        x1 - 35
+    )
+    draw_centered_text(
+        draw,
+        "A IMAGEM DO TEMA",
+        y0 + 412,
+        fonte(27, True),
+        NAVY,
+        x0 + 35,
+        x1 - 35
+    )
+
+
+def desenhar_fundo():
+    # Fundo totalmente sólido, sem degradê.
+    return Image.new("RGB", (W, H), BABY_PINK)
+
+
+
+def desenhar_tema(draw, tema, y):
+    for tam in [72, 66, 60, 54, 48]:
+        f = fonte(tam, True)
+        linhas = wrap_text(draw, tema.upper(), f, 860)
+        if len(linhas) <= 2:
+            break
+
+    bb = draw.textbbox((0, 0), "Ag", font=f)
+    line_h = bb[3] - bb[1]
+
+    yy = y
+    for linha in linhas:
+        draw_centered_text(
+            draw, linha, yy, f, NAVY, 90, W - 90
+        )
+        yy += line_h + 10
+
+    return yy
+
+
+# ============================================================
+# RENDER — INTRO
+# ============================================================
+
+def render_intro(tema, total_perguntas):
+    img = desenhar_fundo()
+    draw = ImageDraw.Draw(img)
+
+    # Marca
+    draw_centered_text(
+        draw, "JUH QUIZ", 220,
+        fonte(42, True), WHITE, 120, W - 120
+    )
+
+    # Chamada
+    draw_centered_text(
+        draw, "QUANTO VOCÊ SABE SOBRE:",
+        360, fonte(34, True), WHITE, 100, W - 100
+    )
+
+    # Tema em destaque
+    tema_fim = desenhar_tema(draw, tema, 430)
+
+    # Modo 2 = espaço para colocar a imagem depois.
+    if MODO_LAYOUT == 2:
+        desenhar_campo_imagem_tema(draw)
+    else:
+        # No modo 1, mantém uma área limpa sem placeholder.
+        draw.rounded_rectangle(
+            [225, 690, 855, 1240],
+            radius=58,
+            fill=(252, 220, 234),
+            outline=(255, 242, 249),
+            width=10
+        )
+
+    # Rodapé discreto
+    draw_centered_text(
+        draw, "@juhquiz",
+        H - 120, fonte(28, True),
+        NAVY, 120, W - 120
+    )
+
+    return img
+
+
+# ============================================================
+# RENDER — PERGUNTA
+# ============================================================
+
+def render_frame(tema, pergunta, numero, total_perguntas, estado, timer=None):
+    img = desenhar_fundo()
+    draw = ImageDraw.Draw(img)
+
+    # Logo compacto
+    desenhar_logo_texto(draw, 2)
+
+    # Tema no topo
+    draw.text(
+        (310, 66),
+        "TEMA",
+        font=fonte(20, True),
+        fill=WHITE
+    )
+
+    f_tema_top = fonte(31, True)
+    tema_linhas = wrap_text(draw, tema.upper(), f_tema_top, 430)
+    ty = 94
+    for linha in tema_linhas[:2]:
+        draw.text(
+            (310, ty),
+            linha,
+            font=f_tema_top,
+            fill=NAVY
+        )
+        ty += 35
+
+    # Contador
+    draw.rounded_rectangle(
+        [840, 65, 1018, 140],
+        radius=24,
+        fill=YELLOW
+    )
+    draw_centered_text(
+        draw,
+        f"{numero}/{total_perguntas}",
+        84,
+        fonte(31, True),
+        NAVY,
+        840,
+        1018
+    )
+
+    # A imagem do tema NÃO aparece durante as perguntas.
+    card_top = 185
+
+    # card principal
+    card = [55, card_top, W - 55, H - 105]
+
+    shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(shadow)
+    sd.rounded_rectangle(
+        [card[0] + 18, card[1] + 22, card[2] + 18, card[3] + 22],
+        radius=48,
+        fill=(0, 0, 0, 95)
+    )
+    shadow = shadow.filter(ImageFilter.GaussianBlur(15))
+    img = Image.alpha_composite(img.convert("RGBA"), shadow).convert("RGB")
+    draw = ImageDraw.Draw(img)
+
+    draw.rounded_rectangle(
+        card,
+        radius=48,
+        fill=WHITE,
+        outline=(255, 255, 255),
+        width=8
+    )
+
+    # chamada
+    chamada = [310, card_top + 28, 770, card_top + 91]
+    draw.rounded_rectangle(
+        chamada,
+        radius=31,
+        fill=PURPLE
+    )
+    draw_centered_text(
+        draw,
+        "DESAFIO RÁPIDO",
+        card_top + 45,
+        fonte(27, True),
+        WHITE,
+        chamada[0],
+        chamada[2]
+    )
+
+    draw_centered_text(
+        draw,
+        f"PERGUNTA {numero} DE {total_perguntas}",
+        card_top + 115,
+        fonte(25, True),
+        BLUE
+    )
+
+    # pergunta
+    f_q = fonte_pergunta(draw, pergunta["pergunta"], max_width=790, max_lines=4)
+    linhas = wrap_text(draw, pergunta["pergunta"], f_q, 790)
+
+    bb_ag = draw.textbbox((0, 0), "Ag", font=f_q)
+    line_h = bb_ag[3] - bb_ag[1]
+    bloco_h = len(linhas) * (line_h + 8)
+
+    question_y = card_top + 175
+    question_bottom = question_y + bloco_h
+
+    # fundo amarelo tipo marca-texto
+    draw.rounded_rectangle(
+        [125, question_y - 15, W - 125, question_bottom + 16],
+        radius=20,
+        fill=(255, 221, 237)
+    )
+
+    yy = question_y
+    for linha in linhas:
+        draw_centered_text(
+            draw,
+            linha,
+            yy,
+            f_q,
+            NAVY,
+            125,
+            W - 125
+        )
+        yy += line_h + 8
+
+    # cronômetro
+    timer_y = max(card_top + 410, question_bottom + 58)
+    timer_size = 118
+    tx0 = W / 2 - timer_size / 2
+    ty0 = timer_y
+    tx1 = W / 2 + timer_size / 2
+    ty1 = timer_y + timer_size
+
+    draw.ellipse(
+        [tx0 - 7, ty0 - 7, tx1 + 7, ty1 + 7],
+        fill=CYAN
+    )
+    draw.ellipse(
+        [tx0, ty0, tx1, ty1],
+        fill=NAVY
+    )
+
+    if estado == "reading":
+        timer_txt = "..."
+        feedback = "OUÇA A PERGUNTA"
+    elif estado == "countdown":
+        timer_txt = str(timer)
+        feedback = "RESPONDA AGORA"
+    else:
+        timer_txt = "✓"
+        feedback = "RESPOSTA CORRETA"
+
+    draw_centered_text(
+        draw,
+        timer_txt,
+        timer_y + 24,
+        fonte(50, True),
+        WHITE,
+        int(tx0),
+        int(tx1)
+    )
+
+    draw_centered_text(
+        draw,
+        feedback,
+        timer_y + 135,
+        fonte(24, True),
+        PURPLE
+    )
+
+    # alternativas
+    alt_top = timer_y + 195
+
+    # Garante que 3 alternativas + rodapé sempre caibam.
+    disponivel = (H - 225) - alt_top
+    alt_gap = 22
+    alt_h = min(116, max(82, int((disponivel - 2 * alt_gap) / 3)))
+
+    letras = ["A", "B", "C"]
+    cores = [CYAN, PURPLE, YELLOW]
+
+    for j, alt in enumerate(pergunta["alternativas"]):
+        yy = alt_top + j * (alt_h + alt_gap)
+        correta = j == int(pergunta["correta"])
+
+        if estado == "answer" and correta:
+            bg = (220, 255, 236)
+            outline = GREEN
+            label_bg = GREEN
+            text_color = GREEN_DARK
+        elif estado == "answer" and not correta:
+            bg = (238, 241, 248)
+            outline = (190, 198, 218)
+            label_bg = (150, 160, 185)
+            text_color = (120, 126, 145)
+        else:
+            bg = (255, 255, 255)
+            outline = cores[j]
+            label_bg = cores[j]
+            text_color = NAVY
+
+        box = [120, yy, W - 120, yy + alt_h]
+
+        draw.rounded_rectangle(
+            [box[0] + 7, box[1] + 8, box[2] + 7, box[3] + 8],
+            radius=24,
+            fill=(235, 205, 222)
+        )
+        draw.rounded_rectangle(
+            box,
+            radius=24,
+            fill=bg,
+            outline=outline,
+            width=5
+        )
+
+        label_w = 78
+        label = [
+            box[0] + 18,
+            yy + 14,
+            box[0] + 18 + label_w,
+            yy + alt_h - 14
+        ]
+
+        draw.rounded_rectangle(
+            label,
+            radius=18,
+            fill=label_bg
+        )
+
+        letra = "✓" if estado == "answer" and correta else letras[j]
+
+        draw_centered_text(
+            draw,
+            letra,
+            yy + max(18, (alt_h - 46) // 2),
+            fonte(35, True),
+            NAVY if (j == 2 and not (estado == "answer" and correta)) else WHITE,
+            int(label[0]),
+            int(label[2])
+        )
+
+        # ajusta fonte da alternativa
+        tam_alt = 35
+        if len(alt) > 45:
+            tam_alt = 28
+        elif len(alt) > 32:
+            tam_alt = 31
+
+        f_alt = fonte(tam_alt, True)
+        alt_lines = wrap_text(draw, alt, f_alt, box[2] - (label[2] + 65))
+
+        bb_alt = draw.textbbox((0, 0), "Ag", font=f_alt)
+        lh_alt = bb_alt[3] - bb_alt[1]
+
+        total_alt_h = len(alt_lines) * (lh_alt + 3)
+        alt_text_y = yy + (alt_h - total_alt_h) / 2
+
+        for linha in alt_lines[:2]:
+            draw.text(
+                (label[2] + 28, alt_text_y),
+                linha,
+                font=f_alt,
+                fill=text_color
+            )
+            alt_text_y += lh_alt + 3
+
+    # progresso — adapta automaticamente à quantidade de perguntas
+    dot_y = H - 150
+    if total_perguntas <= 12:
+        espacamento = min(42, 720 / max(1, total_perguntas - 1)) if total_perguntas > 1 else 0
+        largura_total = espacamento * max(0, total_perguntas - 1)
+        start_x = W / 2 - largura_total / 2
+        raio = 8 if total_perguntas <= 8 else 6
+
+        for i in range(total_perguntas):
+            cx = start_x + i * espacamento
+            if i < numero - 1:
+                cor = GREEN
+            elif i == numero - 1:
+                cor = BLUE
+            else:
+                cor = (196, 209, 236)
+            draw.ellipse(
+                [cx-raio, dot_y-raio, cx+raio, dot_y+raio],
+                fill=cor
+            )
+    else:
+        # Para muitos itens, usa barra para não apertar a tela.
+        barra = [180, dot_y - 8, W - 180, dot_y + 8]
+        draw.rounded_rectangle(barra, radius=8, fill=(196, 209, 236))
+        progresso = numero / total_perguntas
+        draw.rounded_rectangle(
+            [barra[0], barra[1], barra[0] + (barra[2]-barra[0]) * progresso, barra[3]],
+            radius=8,
+            fill=BLUE
+        )
+
+    draw_centered_text(
+        draw,
+        "@juhquiz • QUANTAS VOCÊ CONSEGUE ACERTAR?",
+        H - 105,
+        fonte(22, True),
+        (176, 196, 230)
+    )
+
+    return img
+
+
+# ============================================================
+# RENDER — FINAL
+# ============================================================
+
+def render_final(tema, total_perguntas):
+    img = desenhar_fundo()
+    draw = ImageDraw.Draw(img)
+
+    desenhar_logo_texto(draw, 1)
+
+    draw_centered_text(draw, "FIM DO DESAFIO!", 500, fonte(65, True), NAVY)
+
+    desenhar_tema(draw, tema, 630)
+
+    draw_centered_text(
+        draw,
+        "QUANTAS VOCÊ ACERTOU?",
+        830,
+        fonte(48, True),
+        WHITE
+    )
+
+    draw_centered_text(
+        draw,
+        f"{total_perguntas}/{total_perguntas}?",
+        960,
+        fonte(100, True),
+        CYAN
+    )
+
+    draw.rounded_rectangle(
+        [180, 1120, W - 180, 1255],
+        radius=38,
+        fill=PINK,
+        outline=WHITE,
+        width=5
+    )
+    draw_centered_text(
+        draw,
+        "COMENTA SUA PONTUAÇÃO",
+        1160,
+        fonte(34, True),
+        WHITE,
+        180,
+        W - 180
+    )
+
+    draw_centered_text(
+        draw,
+        "@juhquiz",
+        H - 120,
+        fonte(34, True),
+        (180, 210, 255)
+    )
+
+    return img
+
+
+# ============================================================
+# ÁUDIO / FFMPEG
+# ============================================================
+
+def limpar_tts(texto):
+    texto = str(texto)
+    texto = re.sub(r"\s+", " ", texto).strip()
+    return texto
+
+
+def tts_salvar(texto, caminho):
+    caminho = Path(caminho)
+    if caminho.exists():
+        caminho.unlink()
+
+    cmd = [
+        "edge-tts",
+        "--voice", VOZ,
+        "--rate", VELOCIDADE_VOZ,
+        "--text", limpar_tts(texto),
+        "--write-media", str(caminho)
+    ]
+
+    executar(cmd)
+
+    if not caminho.exists() or caminho.stat().st_size < 500:
+        raise RuntimeError(f"Áudio não foi criado: {caminho}")
+
+
+def duracao_audio(caminho):
+    cmd = [
+        "ffprobe",
+        "-v", "error",
+        "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1",
+        str(caminho)
+    ]
+    return float(subprocess.check_output(cmd, text=True).strip())
+
+
+def criar_beep(caminho, frequencia=950):
+    cmd = [
+        "ffmpeg", "-y",
+        "-f", "lavfi",
+        "-i", f"sine=frequency={frequencia}:duration=0.14",
+        "-af", "volume=0.55,apad=pad_dur=1",
+        "-t", "1.0",
+        "-c:a", "aac",
+        "-b:a", "160k",
+        "-ar", str(AUDIO_HZ),
+        "-ac", str(AUDIO_CHANNELS),
+        str(caminho)
+    ]
+    executar(cmd)
+
+
+def criar_clipe_imagem(img_path, duracao, saida, audio=None):
+    duracao = float(duracao)
+
+    if audio:
+        cmd = [
+            "ffmpeg", "-y",
+            "-loop", "1",
+            "-i", str(img_path),
+            "-i", str(audio),
+            "-t", f"{duracao:.3f}",
+            "-vf", f"scale={W}:{H},fps={FPS},format=yuv420p",
+            "-af", f"aresample={AUDIO_HZ}:async=1:first_pts=0,apad",
+            "-c:v", "libx264",
+            "-preset", "veryfast",
+            "-crf", "20",
+            "-pix_fmt", "yuv420p",
+            "-c:a", "aac",
+            "-b:a", "160k",
+            "-ar", str(AUDIO_HZ),
+            "-ac", str(AUDIO_CHANNELS),
+            "-video_track_timescale", "90000",
+            "-avoid_negative_ts", "make_zero",
+            "-movflags", "+faststart",
+            str(saida)
+        ]
+    else:
+        cmd = [
+            "ffmpeg", "-y",
+            "-loop", "1",
+            "-i", str(img_path),
+            "-f", "lavfi",
+            "-i", f"anullsrc=channel_layout=stereo:sample_rate={AUDIO_HZ}",
+            "-t", f"{duracao:.3f}",
+            "-vf", f"scale={W}:{H},fps={FPS},format=yuv420p",
+            "-c:v", "libx264",
+            "-preset", "veryfast",
+            "-crf", "20",
+            "-pix_fmt", "yuv420p",
+            "-c:a", "aac",
+            "-b:a", "160k",
+            "-ar", str(AUDIO_HZ),
+            "-ac", str(AUDIO_CHANNELS),
+            "-shortest",
+            "-video_track_timescale", "90000",
+            "-avoid_negative_ts", "make_zero",
+            "-movflags", "+faststart",
+            str(saida)
+        ]
+
+    executar(cmd)
+
+
+def juntar_clipes(lista, saida, concat_path):
+    concat_path = Path(concat_path).resolve()
+    saida = Path(saida).resolve()
+
+    concat_path.parent.mkdir(parents=True, exist_ok=True)
+    saida.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(concat_path, "w", encoding="utf-8") as f:
+        for p in lista:
+            p_abs = Path(p).resolve()
+
+            if not p_abs.exists():
+                raise FileNotFoundError(f"Segmento não encontrado: {p_abs}")
+
+            caminho_ffmpeg = str(p_abs).replace("'", "'\\''")
+            f.write("file '" + caminho_ffmpeg + "'\n")
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-fflags", "+genpts",
+        "-f", "concat",
+        "-safe", "0",
+        "-i", str(concat_path),
+        "-c:v", "libx264",
+        "-preset", "veryfast",
+        "-crf", "20",
+        "-pix_fmt", "yuv420p",
+        "-c:a", "aac",
+        "-b:a", "160k",
+        "-ar", str(AUDIO_HZ),
+        "-ac", str(AUDIO_CHANNELS),
+        "-af", f"aresample={AUDIO_HZ}:async=1:first_pts=0",
+        "-avoid_negative_ts", "make_zero",
+        "-movflags", "+faststart",
+        str(saida)
+    ]
+
+    executar(cmd)
+
+
+# ============================================================
+# VALIDAÇÃO
+# ============================================================
+
+def validar():
+    if not isinstance(QUIZZES, dict) or not QUIZZES:
+        raise ValueError("QUIZZES está vazio.")
+
+    for tema, perguntas in QUIZZES.items():
+        if not str(tema).strip():
+            raise ValueError("Existe um tema sem nome.")
+
+        if not isinstance(perguntas, list) or len(perguntas) < 1:
+            raise ValueError(
+                f"Tema '{tema}' precisa ter pelo menos 1 pergunta."
+            )
+
+        for posicao, q in enumerate(perguntas, start=1):
+            if not str(q.get("pergunta", "")).strip():
+                raise ValueError(
+                    f"Tema '{tema}', pergunta {posicao}: falta o texto da pergunta."
+                )
+
+            alternativas = q.get("alternativas", [])
+            if len(alternativas) != 3:
+                raise ValueError(
+                    f"Tema '{tema}', pergunta {posicao}: "
+                    "precisa ter exatamente 3 alternativas."
+                )
+
+            if any(not str(a).strip() for a in alternativas):
+                raise ValueError(
+                    f"Tema '{tema}', pergunta {posicao}: "
+                    "há alternativa vazia."
+                )
+
+            if int(q.get("correta", -1)) not in (0, 1, 2):
+                raise ValueError(
+                    f"Tema '{tema}', pergunta {posicao}: "
+                    "'correta' deve ser 0, 1 ou 2."
+                )
+
+
+# ============================================================
+# GERAÇÃO
+# ============================================================
+
+def main():
+    validar()
+
+    if PASTA_TMP.exists():
+        shutil.rmtree(PASTA_TMP)
+
+    PASTA_TMP.mkdir(parents=True, exist_ok=True)
+    PASTA_SAIDA.mkdir(parents=True, exist_ok=True)
+
+    print("=" * 72, flush=True)
+    print("JUH QUIZ NEON", flush=True)
+    print(f"Modo: {MODO_LAYOUT} — {NOME_MODO}", flush=True)
+    print(f"Voz: {VOZ}", flush=True)
+    print(f"Velocidade: {VELOCIDADE_VOZ}", flush=True)
+    print(f"Vídeos: {len(QUIZZES)}", flush=True)
+    print("=" * 72, flush=True)
+
+    beep_normal = PASTA_TMP / "beep_950.m4a"
+    beep_final = PASTA_TMP / "beep_1250.m4a"
+
+    criar_beep(beep_normal, 950)
+    criar_beep(beep_final, 1250)
+
+    videos_gerados = []
+
+    temas = list(QUIZZES.items())
+
+    for video_num, (tema, perguntas) in enumerate(temas, start=1):
+        perguntas_tema = perguntas
+        total_perguntas = len(perguntas_tema)
+
+        print("\n" + "=" * 72, flush=True)
+        print(
+            f"🎬 {video_num:02d}/{len(temas):02d} — {tema}",
+            flush=True
+        )
+        print("=" * 72, flush=True)
+
+        pasta_video = PASTA_TMP / f"video_{video_num:02d}_{slug(tema)}"
+        pasta_video.mkdir(parents=True, exist_ok=True)
+
+        segmentos = []
+
+        # ----------------------------------------------------
+        # 0) TELA DO TEMA + NARRAÇÃO DO TEMA
+        # ----------------------------------------------------
+        frame_tema = pasta_video / "00_tema.png"
+        render_intro(tema, total_perguntas).save(frame_tema)
+
+        audio_tema = pasta_video / "00_tema.mp3"
+        fala_tema = f"Quanto você sabe sobre: {tema}?"
+        tts_salvar(fala_tema, audio_tema)
+
+        dur_tema = duracao_audio(audio_tema) + PAUSA_DEPOIS_TEMA
+
+        clip_tema = pasta_video / "00_tema.mp4"
+        criar_clipe_imagem(
+            frame_tema,
+            dur_tema,
+            clip_tema,
+            audio=audio_tema
+        )
+        segmentos.append(clip_tema)
+
+        # ----------------------------------------------------
+        # PERGUNTAS DO TEMA — quantidade automática
+        # ----------------------------------------------------
+        for idx, pergunta in enumerate(perguntas_tema):
+            numero = idx + 1
+
+            print(
+                f" • {numero}/{total_perguntas} — {pergunta['pergunta']}",
+                flush=True
+            )
+
+            pasta_q = pasta_video / f"q{numero:02d}"
+            pasta_q.mkdir(parents=True, exist_ok=True)
+
+            # 1) lê SOMENTE a pergunta
+            audio_q = pasta_q / "pergunta.mp3"
+            tts_salvar(pergunta["pergunta"], audio_q)
+
+            dur_q = duracao_audio(audio_q) + PAUSA_DEPOIS_PERGUNTA
+
+            frame_q = pasta_q / "01_pergunta.png"
+            render_frame(
+                tema=tema,
+                pergunta=pergunta,
+                numero=numero,
+                total_perguntas=total_perguntas,
+                estado="reading"
+            ).save(frame_q)
+
+            clip_q = pasta_q / "01_pergunta.mp4"
+            criar_clipe_imagem(
+                frame_q,
+                dur_q,
+                clip_q,
+                audio=audio_q
+            )
+            segmentos.append(clip_q)
+
+            # 2) contagem 3, 2, 1
+            for segundos in range(TEMPO_ESCOLHA, 0, -1):
+                frame_timer = pasta_q / f"timer_{segundos}.png"
+
+                render_frame(
+                    tema=tema,
+                    pergunta=pergunta,
+                    numero=numero,
+                total_perguntas=total_perguntas,
+                    estado="countdown",
+                    timer=segundos
+                ).save(frame_timer)
+
+                clip_timer = pasta_q / f"timer_{segundos}.mp4"
+
+                som = beep_final if segundos == 1 else beep_normal
+
+                criar_clipe_imagem(
+                    frame_timer,
+                    1.0,
+                    clip_timer,
+                    audio=som
+                )
+                segmentos.append(clip_timer)
+
+            # 3) revela a correta e lê SOMENTE a resposta certa
+            correta = int(pergunta["correta"])
+            texto_resposta = pergunta["alternativas"][correta]
+
+            audio_resp = pasta_q / "resposta.mp3"
+            tts_salvar(texto_resposta, audio_resp)
+
+            dur_resp = (
+                duracao_audio(audio_resp)
+                + PAUSA_DEPOIS_RESPOSTA
+            )
+
+            frame_resp = pasta_q / "03_resposta.png"
+            render_frame(
+                tema=tema,
+                pergunta=pergunta,
+                numero=numero,
+                total_perguntas=total_perguntas,
+                estado="answer"
+            ).save(frame_resp)
+
+            clip_resp = pasta_q / "03_resposta.mp4"
+            criar_clipe_imagem(
+                frame_resp,
+                dur_resp,
+                clip_resp,
+                audio=audio_resp
+            )
+            segmentos.append(clip_resp)
+
+        # ----------------------------------------------------
+        # TELA FINAL
+        # ----------------------------------------------------
+        frame_final = pasta_video / "final.png"
+        render_final(tema, total_perguntas).save(frame_final)
+
+        clip_final = pasta_video / "final.mp4"
+        criar_clipe_imagem(
+            frame_final,
+            2.0,
+            clip_final
+        )
+        segmentos.append(clip_final)
+
+        nome_saida = (
+            f"{video_num:02d}_{slug(tema)}_"
+            f"modo{MODO_LAYOUT}_{DATA_DO_DIA}.mp4"
+        )
+        saida_video = PASTA_SAIDA / nome_saida
+
+        juntar_clipes(
+            segmentos,
+            saida_video,
+            pasta_video / "concat.txt"
+        )
+
+        videos_gerados.append(saida_video)
+
+        print("✅ Gerado:", saida_video, flush=True)
+
+    print("\n✅ FINALIZADO", flush=True)
+    print(f"📁 {PASTA_SAIDA}", flush=True)
+
+    for p in videos_gerados:
+        print(" -", p, flush=True)
+
+
+if __name__ == "__main__":
+    main()
