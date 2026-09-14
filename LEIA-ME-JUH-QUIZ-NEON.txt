@@ -1,0 +1,30 @@
+JUH QUIZ NEON — COMO USAR
+
+Arquivos novos:
+1. gerar_videos_neon.py
+2. .github/workflows/gerar-videos-neon.yml
+
+O arquivo gerar_videos_game_show.py deve continuar no repositório.
+O novo gerador importa dele os 45 temas e as 225 perguntas.
+
+NO GITHUB:
+Actions > Gerar Juh Quiz Neon > Run workflow
+
+Escolha:
+1 = SEM IMAGEM
+2 = COM ESPAÇO REDONDO FIXO PARA IMAGEM
+
+No modo 2:
+- o círculo da imagem fica na MESMA posição na tela do tema e nas 5 perguntas;
+- a imagem real pode ser colocada depois no editor de vídeo;
+- o círculo não invade a área do enunciado.
+
+ÁUDIO:
+- voz: pt-BR-AntonioNeural
+- velocidade: +10%
+- primeiro lê o tema;
+- depois lê apenas a pergunta;
+- contagem de 3 segundos;
+- depois lê apenas a resposta correta.
+
+O requirements.txt atual do repositório pode ser mantido.
