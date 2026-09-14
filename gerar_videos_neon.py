@@ -169,11 +169,11 @@ QUIZZES = {
 # Imagens colocadas automaticamente no modo 2.
 # Salve esses arquivos na pasta "imagens_temas" do repositório.
 TEMA_IMAGENS = {
-    "Menstruação": "imagens_temas/menstruacao.png",
-    "Gravidez": "imagens_temas/gravidez.png",
-    "Vacina": "imagens_temas/vacina.png",
+    "Anticoncepcional": "imagens_temas/anticoncepcional.png",
+    "Sono": "imagens_temas/sono.png",
+    "Cérebro e emoções": "imagens_temas/cerebro_emocoes.png",
+    "Primeiros socorros": "imagens_temas/primeiros_socorros.png",
 }
-
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
 # ------------------------------------------------------------
