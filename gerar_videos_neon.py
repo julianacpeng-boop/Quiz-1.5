@@ -47,91 +47,91 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
 QUIZZES = {
 
-    "Drácula": [
+    "Múmia": [
         {
-            "pergunta": "Drácula é mais conhecido por ser qual tipo de criatura?",
+            "pergunta": "As múmias são mais associadas historicamente a qual civilização antiga?",
             "alternativas": [
-                "Lobisomem",
-                "Vampiro",
-                "Fantasma"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Quem escreveu o romance clássico Drácula?",
-            "alternativas": [
-                "Bram Stoker",
-                "Edgar Allan Poe",
-                "Mary Shelley"
+                "Egípcia",
+                "Romana",
+                "Maia"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Em muitas histórias, Drácula costuma dormir durante o dia em:",
+            "pergunta": "No imaginário popular, uma múmia costuma aparecer envolta em:",
             "alternativas": [
-                "Uma torre encantada",
-                "Um quarto de hotel",
-                "Um caixão"
+                "Correntes de ferro",
+                "Faixas de tecido",
+                "Escamas douradas"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Em muitas histórias de ficção, a múmia costuma despertar após:",
+            "alternativas": [
+                "Uma festa no castelo",
+                "Um feitiço ou maldição",
+                "Uma viagem de navio"
             ],
             "correta": 2
         },
     ],
 
-    "Frankenstein": [
+    "Zumbi": [
         {
-            "pergunta": "Quem escreveu o romance clássico Frankenstein?",
+            "pergunta": "Nos filmes e histórias, zumbis costumam ser retratados como:",
             "alternativas": [
-                "Mary Shelley",
-                "Bram Stoker",
-                "Robert Louis Stevenson"
+                "Mortos-vivos",
+                "Alienígenas",
+                "Robôs"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Na história, Victor Frankenstein é principalmente:",
+            "pergunta": "Qual característica é muito comum em zumbis da ficção?",
             "alternativas": [
-                "Um caçador de vampiros",
-                "Um jovem estudioso da ciência",
-                "Um rei amaldiçoado"
+                "Movimentos muito elegantes",
+                "Andar lento ou desajeitado",
+                "Poder de voar"
             ],
             "correta": 1
         },
         {
-            "pergunta": "O grande objetivo de Victor Frankenstein em seus experimentos era:",
+            "pergunta": "Em histórias de apocalipse zumbi, os personagens normalmente tentam:",
             "alternativas": [
-                "Encontrar um tesouro perdido",
-                "Criar uma máquina do tempo",
-                "Dar vida à matéria sem vida"
+                "Abrir um zoológico",
+                "Virar cantores famosos",
+                "Sobreviver e encontrar abrigo"
             ],
             "correta": 2
         },
     ],
 
-    "O Médico e o Monstro": [
+    "Kraken": [
         {
-            "pergunta": "Qual é o nome do médico protagonista de O Médico e o Monstro?",
+            "pergunta": "O Kraken é geralmente descrito como uma criatura de qual ambiente?",
             "alternativas": [
-                "Dr. Jekyll",
-                "Dr. Moreau",
-                "Dr. Watson"
+                "Do oceano",
+                "Do deserto",
+                "Das montanhas"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Qual é o nome da personalidade sombria de Dr. Jekyll?",
+            "pergunta": "Em lendas e histórias, o Kraken costuma ter aparência semelhante à de:",
             "alternativas": [
-                "Mr. Black",
-                "Mr. Hyde",
-                "Mr. Crow"
+                "Um lobo gigante",
+                "Um polvo ou lula monstruosa",
+                "Um cavalo alado"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Qual tema é central na história de O Médico e o Monstro?",
+            "pergunta": "O Kraken é famoso por atacar principalmente:",
             "alternativas": [
-                "Viagens espaciais",
-                "Caça a tesouros",
-                "O conflito entre lados diferentes da personalidade humana"
+                "Castelos",
+                "Florestas",
+                "Navios"
             ],
             "correta": 2
         },
@@ -139,19 +139,12 @@ QUIZZES = {
 
 }
 
-
-# ============================================================
-# IMAGENS DOS TEMAS
-# ============================================================
-# As imagens aparecem automaticamente na abertura no MODO 2.
-# Os arquivos devem estar dentro da pasta "imagens_temas".
 
 TEMA_IMAGENS = {
-    "Drácula": "imagens_temas/dracula.png",
-    "Frankenstein": "imagens_temas/frankenstein.png",
-    "O Médico e o Monstro": "imagens_temas/medico_monstro.png",
+    "Múmia": "imagens_temas/mumia.png",
+    "Zumbi": "imagens_temas/zumbi.png",
+    "Kraken": "imagens_temas/kraken.png",
 }
-
 
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
