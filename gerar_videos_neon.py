@@ -47,103 +47,102 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
 QUIZZES = {
 
-    "Múmia": [
+    "Medusa": [
         {
-            "pergunta": "As múmias são mais associadas historicamente a qual civilização antiga?",
+            "pergunta": "Na mitologia grega, o que acontecia com quem olhava diretamente para Medusa?",
             "alternativas": [
-                "Egípcia",
-                "Romana",
-                "Maia"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "No imaginário popular, uma múmia costuma aparecer envolta em:",
-            "alternativas": [
-                "Correntes de ferro",
-                "Faixas de tecido",
-                "Escamas douradas"
+                "Ficava invisível",
+                "Virava pedra",
+                "Perdia a memória"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Em muitas histórias de ficção, a múmia costuma despertar após:",
+            "pergunta": "Qual era a característica mais marcante da aparência de Medusa?",
             "alternativas": [
-                "Uma festa no castelo",
-                "Um feitiço ou maldição",
-                "Uma viagem de navio"
+                "Cobras no lugar dos cabelos",
+                "Asas de morcego",
+                "Pele de ouro"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Medusa é conhecida principalmente como uma personagem de qual tipo de narrativa?",
+            "alternativas": [
+                "Conto de fadas",
+                "Ficção científica",
+                "Mitologia grega"
             ],
             "correta": 2
         },
     ],
 
-    "Zumbi": [
+    "Minotauro": [
         {
-            "pergunta": "Nos filmes e histórias, zumbis costumam ser retratados como:",
+            "pergunta": "O Minotauro é uma criatura com corpo de homem e cabeça de:",
             "alternativas": [
-                "Mortos-vivos",
-                "Alienígenas",
-                "Robôs"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Qual característica é muito comum em zumbis da ficção?",
-            "alternativas": [
-                "Movimentos muito elegantes",
-                "Andar lento ou desajeitado",
-                "Poder de voar"
+                "Leão",
+                "Touro",
+                "Cavalo"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Em histórias de apocalipse zumbi, os personagens normalmente tentam:",
+            "pergunta": "Em qual lugar o Minotauro vivia preso, segundo o mito?",
             "alternativas": [
-                "Abrir um zoológico",
-                "Virar cantores famosos",
-                "Sobreviver e encontrar abrigo"
+                "Em um castelo de gelo",
+                "Em uma floresta encantada",
+                "Em um labirinto"
             ],
             "correta": 2
+        },
+        {
+            "pergunta": "O Minotauro faz parte de qual tradição mitológica?",
+            "alternativas": [
+                "Mitologia grega",
+                "Mitologia egípcia",
+                "Mitologia nórdica"
+            ],
+            "correta": 0
         },
     ],
 
-    "Kraken": [
+    "Criatura do Lago Negro": [
         {
-            "pergunta": "O Kraken é geralmente descrito como uma criatura de qual ambiente?",
+            "pergunta": "A Criatura do Lago Negro é mais conhecida por viver em:",
             "alternativas": [
-                "Do oceano",
-                "Do deserto",
-                "Das montanhas"
+                "Um castelo abandonado",
+                "Uma floresta congelada",
+                "Uma lagoa ou ambiente aquático"
             ],
-            "correta": 0
+            "correta": 2
         },
         {
-            "pergunta": "Em lendas e histórias, o Kraken costuma ter aparência semelhante à de:",
+            "pergunta": "Essa criatura ficou famosa principalmente em histórias de:",
             "alternativas": [
-                "Um lobo gigante",
-                "Um polvo ou lula monstruosa",
-                "Um cavalo alado"
+                "Romance",
+                "Terror e ficção",
+                "Comédia musical"
             ],
             "correta": 1
         },
         {
-            "pergunta": "O Kraken é famoso por atacar principalmente:",
+            "pergunta": "A aparência da Criatura do Lago Negro lembra mais qual tipo de ser?",
             "alternativas": [
-                "Castelos",
-                "Florestas",
-                "Navios"
+                "Um ser anfíbio",
+                "Um dragão de fogo",
+                "Um esqueleto vivo"
             ],
-            "correta": 2
+            "correta": 0
         },
     ],
 
 }
 
-
 TEMA_IMAGENS = {
-    "Múmia": "imagens_temas/mumia.png",
-    "Zumbi": "imagens_temas/zumbi.png",
-    "Kraken": "imagens_temas/kraken.png",
+    "Medusa": "imagens_temas/medusa.png",
+    "Minotauro": "imagens_temas/minotauro.png",
+    "Criatura do Lago Negro": "imagens_temas/lago_negro.png",
 }
 
 # ------------------------------------------------------------
