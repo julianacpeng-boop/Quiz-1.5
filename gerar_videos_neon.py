@@ -112,26 +112,93 @@ QUIZZES = {
             "pergunta": "Durante o sono REM, o que normalmente acontece com grande parte dos músculos do corpo?",
             "alternativas": [
                 "Ficam temporariamente menos ativos",
-                "Crescem rapidamente",
-                "Param de receber sangue"
-            ],
-            "correta": 0
-        },
+                "Crescem raQUIZZES = {
+
+    "Drácula": [
         {
-            "pergunta": "O que geralmente acontece com a temperatura corporal durante o sono?",
+            "pergunta": "Drácula é mais conhecido por ser qual tipo de criatura?",
             "alternativas": [
-                "Aumenta vários graus",
-                "Tende a diminuir",
-                "Permanece sempre exatamente igual"
+                "Lobisomem",
+                "Vampiro",
+                "Fantasma"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Em qual fase do sono costumam ocorrer sonhos mais vívidos?",
+            "pergunta": "Quem escreveu o romance clássico Drácula?",
             "alternativas": [
-                "Somente ao acordar",
-                "Apenas no primeiro minuto de sono",
-                "Sono REM"
+                "Bram Stoker",
+                "Edgar Allan Poe",
+                "Mary Shelley"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Em muitas histórias, Drácula costuma dormir durante o dia em:",
+            "alternativas": [
+                "Uma torre encantada",
+                "Um quarto de hotel",
+                "Um caixão"
+            ],
+            "correta": 2
+        },
+    ],
+
+    "Frankenstein": [
+        {
+            "pergunta": "Quem criou a história clássica de Frankenstein?",
+            "alternativas": [
+                "Mary Shelley",
+                "Agatha Christie",
+                "Anne Rice"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Na história, Victor Frankenstein é principalmente:",
+            "alternativas": [
+                "Um caçador de vampiros",
+                "Um cientista",
+                "Um rei amaldiçoado"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "A criatura de Frankenstein é formada a partir de:",
+            "alternativas": [
+                "Sombras vivas",
+                "Pedras mágicas",
+                "Partes de corpos humanos"
+            ],
+            "correta": 2
+        },
+    ],
+
+    "O Médico e o Monstro": [
+        {
+            "pergunta": "Na história, qual é o nome do médico que cria uma fórmula capaz de mudar sua personalidade?",
+            "alternativas": [
+                "Dr. Jekyll",
+                "Dr. Moreau",
+                "Dr.acula"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Qual é o nome da identidade monstruosa do personagem principal?",
+            "alternativas": [
+                "Mr. Hyde",
+                "Mr. Crow",
+                "Mr. Black"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "O principal tema dessa história envolve:",
+            "alternativas": [
+                "Viagem no tempo",
+                "Invasão alienígena",
+                "O lado sombrio da natureza humana"
             ],
             "correta": 2
         },
@@ -144,14 +211,9 @@ QUIZZES = {
 # Salve estes arquivos dentro da pasta "imagens_temas".
 
 TEMA_IMAGENS = {
-    "Coisas que seu celular sabe sobre você e você nem percebe":
-        "imagens_temas/celular_sabe.png",
-
-    "Hábitos comuns que podem revelar mais sobre você do que imagina":
-        "imagens_temas/habitos_revelam.png",
-
-    "Coisas bizarras que acontecem no corpo quando você está dormindo":
-        "imagens_temas/corpo_dormindo.png",
+    "Drácula": "imagens_temas/dracula.png",
+    "Frankenstein": "imagens_temas/frankenstein.png",
+    "O Médico e o Monstro": "imagens_temas/medico_monstro.png",
 }
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
