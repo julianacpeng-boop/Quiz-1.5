@@ -171,6 +171,12 @@ QUIZZES = {
             "pergunta": "Qual substância é bastante associada à sensação de prazer e recompensa no cérebro?",
             "alternativas": [
                 "Dopamina",
+QUIZZES = {
+    "Por que a gente se apaixona?": [
+        {
+            "pergunta": "Qual substância é bastante associada à sensação de prazer e recompensa no cérebro?",
+            "alternativas": [
+                "Dopamina",
                 "Queratina",
                 "Hemoglobina"
             ],
@@ -257,13 +263,7 @@ QUIZZES = {
     ],
 }
 
-# Imagens colocadas automaticamente no modo 2.
-# Salve esses arquivos na pasta "imagens_temas" do repositório.
 TEMA_IMAGENS = {
-    "Anticoncepcional": "imagens_temas/anticoncepcional.png",
-    "Sono": "imagens_temas/sono.png",
-    "Cérebro e emoções": "imagens_temas/cerebro_emocoes.png",
-    "Primeiros socorros": "imagens_temas/primeiros_socorros.png",
     "Por que a gente se apaixona?": "imagens_temas/apaixonar.png",
     "Seu corpo dá sinais antes de você perceber?": "imagens_temas/sinais_corpo.png",
     "Coisas estranhas que o cérebro faz": "imagens_temas/cerebro_estranho.png",
