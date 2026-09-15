@@ -46,198 +46,113 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 # ============================================================
 
 QUIZZES = {
-    "Cuca": [
+
+    "Coisas que seu celular sabe sobre você e você nem percebe": [
         {
-            "pergunta": "No folclore brasileiro, a Cuca é conhecida principalmente como:",
+            "pergunta": "Dependendo das permissões ativadas, qual informação o celular pode registrar ao longo do dia?",
             "alternativas": [
-                "Uma princesa encantada",
-                "Uma bruxa assustadora",
-                "Uma fada protetora"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Na versão popularizada por Monteiro Lobato, a Cuca tem aparência semelhante a qual animal?",
-            "alternativas": [
-                "Jacaré",
-                "Coruja",
-                "Onça"
+                "Sua localização aproximada ou precisa",
+                "Seus pensamentos",
+                "O que você vai sonhar"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Em cantigas populares, a Cuca costuma aparecer para assustar principalmente quem:",
+            "pergunta": "Qual componente do celular consegue detectar movimentos e mudanças de orientação?",
             "alternativas": [
-                "Come muito doce",
-                "Brinca na chuva",
-                "Não quer dormir"
+                "Microfone",
+                "Acelerômetro",
+                "Alto-falante"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "O histórico de localização, quando ativado, pode ajudar a identificar:",
+            "alternativas": [
+                "Sua cor favorita automaticamente",
+                "O que você está pensando",
+                "Lugares que você visita com frequência"
             ],
             "correta": 2
         },
     ],
 
-    "Saci-Pererê": [
+    "Hábitos comuns que podem revelar mais sobre você do que imagina": [
         {
-            "pergunta": "Qual característica física é tradicionalmente associada ao Saci-Pererê?",
+            "pergunta": "Os horários em que você costuma usar o celular podem indicar principalmente:",
             "alternativas": [
-                "Ter uma perna só",
-                "Ter duas asas",
-                "Ter cauda de peixe"
+                "Sua rotina diária",
+                "Seu tipo sanguíneo",
+                "Sua altura"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Qual objeto é uma das marcas mais conhecidas do Saci?",
+            "pergunta": "Compras feitas repetidamente costumam revelar mais diretamente:",
             "alternativas": [
-                "Uma coroa dourada",
-                "Um gorro vermelho",
-                "Uma capa azul"
+                "Sua memória",
+                "Preferências de consumo",
+                "Sua capacidade pulmonar"
             ],
             "correta": 1
         },
         {
-            "pergunta": "No folclore, o Saci é famoso principalmente por:",
+            "pergunta": "Os lugares que uma pessoa frequenta regularmente podem revelar:",
             "alternativas": [
-                "Guardar castelos",
-                "Construir casas",
-                "Fazer travessuras"
+                "A senha do celular",
+                "O número exato de amigos que possui",
+                "Parte de sua rotina e interesses"
             ],
             "correta": 2
         },
     ],
 
-    "Lobisomem": [
+    "Coisas bizarras que acontecem no corpo quando você está dormindo": [
         {
-            "pergunta": "Segundo a lenda, o lobisomem é uma pessoa que se transforma em:",
+            "pergunta": "Durante o sono REM, o que normalmente acontece com grande parte dos músculos do corpo?",
             "alternativas": [
-                "Uma criatura semelhante a um lobo",
-                "Um pássaro gigante",
-                "Uma serpente marinha"
+                "Ficam temporariamente menos ativos",
+                "Crescem rapidamente",
+                "Param de receber sangue"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Qual fenômeno é muito associado às histórias de transformação do lobisomem?",
+            "pergunta": "O que geralmente acontece com a temperatura corporal durante o sono?",
             "alternativas": [
-                "Eclipse solar",
-                "Lua cheia",
-                "Arco-íris"
+                "Aumenta vários graus",
+                "Tende a diminuir",
+                "Permanece sempre exatamente igual"
             ],
             "correta": 1
         },
         {
-            "pergunta": "As histórias de lobisomem pertencem principalmente a qual tipo de narrativa?",
+            "pergunta": "Em qual fase do sono costumam ocorrer sonhos mais vívidos?",
             "alternativas": [
-                "Receitas tradicionais",
-                "Relatos científicos",
-                "Lendas populares"
+                "Somente ao acordar",
+                "Apenas no primeiro minuto de sono",
+                "Sono REM"
             ],
             "correta": 2
         },
     ],
 
-    "Aladin e a lâmpada mágica": [
-        {
-            "pergunta": "Qual objeto muda completamente a vida de Aladin na história clássica?",
-            "alternativas": [
-                "Uma espada encantada",
-                "Uma lâmpada mágica",
-                "Um espelho dourado"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Quem aparece quando a lâmpada mágica é usada?",
-            "alternativas": [
-                "Um gênio",
-                "Um dragão",
-                "Um gigante de pedra"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Antes de encontrar a lâmpada, Aladin é geralmente apresentado como:",
-            "alternativas": [
-                "Um poderoso rei",
-                "Um velho feiticeiro",
-                "Um jovem pobre"
-            ],
-            "correta": 2
-        },
-    ],
-
-    "A história dos Três Porquinhos": [
-        {
-            "pergunta": "De qual material é feita a casa que resiste ao lobo na história dos Três Porquinhos?",
-            "alternativas": [
-                "Palha",
-                "Tijolos",
-                "Folhas"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Qual personagem tenta derrubar as casas dos porquinhos?",
-            "alternativas": [
-                "O lobo",
-                "O urso",
-                "A raposa"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Quais são os três materiais mais associados às casas dos porquinhos?",
-            "alternativas": [
-                "Pedra, vidro e ferro",
-                "Areia, barro e folhas",
-                "Palha, madeira e tijolos"
-            ],
-            "correta": 2
-        },
-    ],
-
-    "A Pequena Sereia — versão sombria": [
-        {
-            "pergunta": "Na história clássica, o que a pequena sereia entrega em troca de ganhar pernas?",
-            "alternativas": [
-                "Sua voz",
-                "Sua coroa",
-                "Sua memória"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Quem oferece à pequena sereia a transformação que permite que ela caminhe em terra?",
-            "alternativas": [
-                "O rei do mar",
-                "A bruxa do mar",
-                "O príncipe"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Na versão original de Hans Christian Andersen, a pequena sereia termina a história:",
-            "alternativas": [
-                "Casando-se com o príncipe",
-                "Voltando imediatamente a ser sereia",
-                "Transformando-se em um ser ligado ao ar"
-            ],
-            "correta": 2
-        },
-    ],
 }
 
-# Imagens colocadas automaticamente no modo 2.
-# Salve os arquivos abaixo dentro da pasta "imagens_temas".
+
+# Imagens automáticas da abertura no modo 2.
+# Salve estes arquivos dentro da pasta "imagens_temas".
+
 TEMA_IMAGENS = {
-    "Cuca": "imagens_temas/cuca.png",
-    "Saci-Pererê": "imagens_temas/saci.png",
-    "Lobisomem": "imagens_temas/lobisomem.png",
-    "Aladin e a lâmpada mágica": "imagens_temas/aladin.png",
-    "A história dos Três Porquinhos": "imagens_temas/tres_porquinhos.png",
-    "A Pequena Sereia — versão sombria": "imagens_temas/sereia_sombria.png",
-}
+    "Coisas que seu celular sabe sobre você e você nem percebe":
+        "imagens_temas/celular_sabe.png",
 
+    "Hábitos comuns que podem revelar mais sobre você do que imagina":
+        "imagens_temas/habitos_revelam.png",
+
+    "Coisas bizarras que acontecem no corpo quando você está dormindo":
+        "imagens_temas/corpo_dormindo.png",
+}
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
 # ------------------------------------------------------------
