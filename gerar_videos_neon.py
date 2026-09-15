@@ -47,73 +47,6 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
 QUIZZES = {
 
-    "Coisas que seu celular sabe sobre você e você nem percebe": [
-        {
-            "pergunta": "Dependendo das permissões ativadas, qual informação o celular pode registrar ao longo do dia?",
-            "alternativas": [
-                "Sua localização aproximada ou precisa",
-                "Seus pensamentos",
-                "O que você vai sonhar"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Qual componente do celular consegue detectar movimentos e mudanças de orientação?",
-            "alternativas": [
-                "Microfone",
-                "Acelerômetro",
-                "Alto-falante"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "O histórico de localização, quando ativado, pode ajudar a identificar:",
-            "alternativas": [
-                "Sua cor favorita automaticamente",
-                "O que você está pensando",
-                "Lugares que você visita com frequência"
-            ],
-            "correta": 2
-        },
-    ],
-
-    "Hábitos comuns que podem revelar mais sobre você do que imagina": [
-        {
-            "pergunta": "Os horários em que você costuma usar o celular podem indicar principalmente:",
-            "alternativas": [
-                "Sua rotina diária",
-                "Seu tipo sanguíneo",
-                "Sua altura"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Compras feitas repetidamente costumam revelar mais diretamente:",
-            "alternativas": [
-                "Sua memória",
-                "Preferências de consumo",
-                "Sua capacidade pulmonar"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Os lugares que uma pessoa frequenta regularmente podem revelar:",
-            "alternativas": [
-                "A senha do celular",
-                "O número exato de amigos que possui",
-                "Parte de sua rotina e interesses"
-            ],
-            "correta": 2
-        },
-    ],
-
-    "Coisas bizarras que acontecem no corpo quando você está dormindo": [
-        {
-            "pergunta": "Durante o sono REM, o que normalmente acontece com grande parte dos músculos do corpo?",
-            "alternativas": [
-                "Ficam temporariamente menos ativos",
-                "Crescem raQUIZZES = {
-
     "Drácula": [
         {
             "pergunta": "Drácula é mais conhecido por ser qual tipo de criatura?",
@@ -146,11 +79,11 @@ QUIZZES = {
 
     "Frankenstein": [
         {
-            "pergunta": "Quem criou a história clássica de Frankenstein?",
+            "pergunta": "Quem escreveu o romance clássico Frankenstein?",
             "alternativas": [
                 "Mary Shelley",
-                "Agatha Christie",
-                "Anne Rice"
+                "Bram Stoker",
+                "Robert Louis Stevenson"
             ],
             "correta": 0
         },
@@ -158,17 +91,17 @@ QUIZZES = {
             "pergunta": "Na história, Victor Frankenstein é principalmente:",
             "alternativas": [
                 "Um caçador de vampiros",
-                "Um cientista",
+                "Um jovem estudioso da ciência",
                 "Um rei amaldiçoado"
             ],
             "correta": 1
         },
         {
-            "pergunta": "A criatura de Frankenstein é formada a partir de:",
+            "pergunta": "O grande objetivo de Victor Frankenstein em seus experimentos era:",
             "alternativas": [
-                "Sombras vivas",
-                "Pedras mágicas",
-                "Partes de corpos humanos"
+                "Encontrar um tesouro perdido",
+                "Criar uma máquina do tempo",
+                "Dar vida à matéria sem vida"
             ],
             "correta": 2
         },
@@ -176,29 +109,29 @@ QUIZZES = {
 
     "O Médico e o Monstro": [
         {
-            "pergunta": "Na história, qual é o nome do médico que cria uma fórmula capaz de mudar sua personalidade?",
+            "pergunta": "Qual é o nome do médico protagonista de O Médico e o Monstro?",
             "alternativas": [
                 "Dr. Jekyll",
                 "Dr. Moreau",
-                "Dr.acula"
+                "Dr. Watson"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Qual é o nome da identidade monstruosa do personagem principal?",
+            "pergunta": "Qual é o nome da personalidade sombria de Dr. Jekyll?",
             "alternativas": [
+                "Mr. Black",
                 "Mr. Hyde",
-                "Mr. Crow",
-                "Mr. Black"
+                "Mr. Crow"
             ],
             "correta": 1
         },
         {
-            "pergunta": "O principal tema dessa história envolve:",
+            "pergunta": "Qual tema é central na história de O Médico e o Monstro?",
             "alternativas": [
-                "Viagem no tempo",
-                "Invasão alienígena",
-                "O lado sombrio da natureza humana"
+                "Viagens espaciais",
+                "Caça a tesouros",
+                "O conflito entre lados diferentes da personalidade humana"
             ],
             "correta": 2
         },
@@ -207,14 +140,22 @@ QUIZZES = {
 }
 
 
-# Imagens automáticas da abertura no modo 2.
-# Salve estes arquivos dentro da pasta "imagens_temas".
+# ============================================================
+# IMAGENS DOS TEMAS
+# ============================================================
+# As imagens aparecem automaticamente na abertura no MODO 2.
+# Os arquivos devem estar dentro da pasta "imagens_temas".
 
 TEMA_IMAGENS = {
     "Drácula": "imagens_temas/dracula.png",
     "Frankenstein": "imagens_temas/frankenstein.png",
     "O Médico e o Monstro": "imagens_temas/medico_monstro.png",
 }
+
+
+# ------------------------------------------------------------
+# CONFIGURAÇÃO
+# ------------------------------------------------------------
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
 # ------------------------------------------------------------
