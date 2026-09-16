@@ -156,7 +156,7 @@ QUIZZES = {
     ],
 
 }
-TEMA_IMAGENS_NOVOS = {
+TEMA_IMAGENS = {
     "Nuckelavee": "imagens_temas/nuckelavee.png",
     "Selkie": "imagens_temas/selkie.png",
     "Tengu": "imagens_temas/tengu.png",
