@@ -47,102 +47,102 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
 QUIZZES = {
 
-    "Medusa": [
+    "Cerberus": [
         {
-            "pergunta": "Na mitologia grega, o que acontecia com quem olhava diretamente para Medusa?",
+            "pergunta": "Cerberus é conhecido principalmente por ser um:",
             "alternativas": [
-                "Ficava invisível",
-                "Virava pedra",
-                "Perdia a memória"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Qual era a característica mais marcante da aparência de Medusa?",
-            "alternativas": [
-                "Cobras no lugar dos cabelos",
-                "Asas de morcego",
-                "Pele de ouro"
+                "Cão de três cabeças",
+                "Dragão marinho",
+                "Cavalo alado"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Medusa é conhecida principalmente como uma personagem de qual tipo de narrativa?",
+            "pergunta": "Na mitologia grega, Cerberus guarda tradicionalmente:",
             "alternativas": [
-                "Conto de fadas",
-                "Ficção científica",
-                "Mitologia grega"
+                "O Olimpo",
+                "A entrada do mundo dos mortos",
+                "O labirinto do Minotauro"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Cerberus está mais ligado a qual deus do submundo?",
+            "alternativas": [
+                "Zeus",
+                "Poseidon",
+                "Hades"
             ],
             "correta": 2
         },
     ],
 
-    "Minotauro": [
+    "Banshee": [
         {
-            "pergunta": "O Minotauro é uma criatura com corpo de homem e cabeça de:",
+            "pergunta": "A Banshee pertence principalmente ao folclore de qual região?",
             "alternativas": [
-                "Leão",
-                "Touro",
-                "Cavalo"
+                "Irlanda",
+                "Egito",
+                "Japão"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "A Banshee é mais conhecida por emitir qual tipo de som?",
+            "alternativas": [
+                "Uma risada alta",
+                "Um lamento ou grito assustador",
+                "Um canto alegre"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Em qual lugar o Minotauro vivia preso, segundo o mito?",
+            "pergunta": "Segundo a lenda, ouvir a Banshee costuma ser sinal de:",
             "alternativas": [
-                "Em um castelo de gelo",
-                "Em uma floresta encantada",
-                "Em um labirinto"
+                "Boa sorte",
+                "Chuva forte",
+                "Morte ou tragédia próxima"
             ],
             "correta": 2
-        },
-        {
-            "pergunta": "O Minotauro faz parte de qual tradição mitológica?",
-            "alternativas": [
-                "Mitologia grega",
-                "Mitologia egípcia",
-                "Mitologia nórdica"
-            ],
-            "correta": 0
         },
     ],
 
-    "Criatura do Lago Negro": [
+    "Gárgula": [
         {
-            "pergunta": "A Criatura do Lago Negro é mais conhecida por viver em:",
+            "pergunta": "As gárgulas são tradicionalmente vistas em qual tipo de construção?",
             "alternativas": [
-                "Um castelo abandonado",
-                "Uma floresta congelada",
-                "Uma lagoa ou ambiente aquático"
+                "Igrejas e catedrais",
+                "Navios piratas",
+                "Pirâmides"
             ],
-            "correta": 2
+            "correta": 0
         },
         {
-            "pergunta": "Essa criatura ficou famosa principalmente em histórias de:",
+            "pergunta": "Além do aspecto assustador, as gárgulas tinham originalmente qual função prática?",
             "alternativas": [
-                "Romance",
-                "Terror e ficção",
-                "Comédia musical"
+                "Iluminar corredores",
+                "Escoar água da chuva",
+                "Tocar sinos"
             ],
             "correta": 1
         },
         {
-            "pergunta": "A aparência da Criatura do Lago Negro lembra mais qual tipo de ser?",
+            "pergunta": "Na ficção, gárgulas muitas vezes são retratadas como criaturas de:",
             "alternativas": [
-                "Um ser anfíbio",
-                "Um dragão de fogo",
-                "Um esqueleto vivo"
+                "Fogo vivo",
+                "Névoa",
+                "Pedra"
             ],
-            "correta": 0
+            "correta": 2
         },
     ],
 
 }
 
 TEMA_IMAGENS = {
-    "Medusa": "imagens_temas/medusa.png",
-    "Minotauro": "imagens_temas/minotauro.png",
-    "Criatura do Lago Negro": "imagens_temas/lago_negro.png",
+    "Cerberus": "imagens_temas/cerberus.png",
+    "Banshee": "imagens_temas/banshee.png",
+    "Gárgula": "imagens_temas/gargula.png",
 }
 
 # ------------------------------------------------------------
