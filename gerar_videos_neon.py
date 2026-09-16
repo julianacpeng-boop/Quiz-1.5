@@ -47,102 +47,194 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
 QUIZZES = {
 
-    "Cerberus": [
+    "Quimera": [
         {
-            "pergunta": "Cerberus é conhecido principalmente por ser um:",
+            "pergunta": "Na mitologia grega, a Quimera é formada pela mistura de quais animais?",
             "alternativas": [
-                "Cão de três cabeças",
-                "Dragão marinho",
-                "Cavalo alado"
+                "Leão, cabra e serpente",
+                "Cavalo, águia e lobo",
+                "Touro, peixe e dragão"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Na mitologia grega, Cerberus guarda tradicionalmente:",
+            "pergunta": "A Quimera era conhecida por conseguir:",
             "alternativas": [
-                "O Olimpo",
-                "A entrada do mundo dos mortos",
-                "O labirinto do Minotauro"
+                "Ficar invisível",
+                "Cuspir fogo",
+                "Controlar o mar"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Cerberus está mais ligado a qual deus do submundo?",
+            "pergunta": "Quem derrotou a Quimera na mitologia grega?",
             "alternativas": [
-                "Zeus",
-                "Poseidon",
-                "Hades"
+                "Hércules",
+                "Perseu",
+                "Belerofonte"
             ],
             "correta": 2
         },
     ],
 
-    "Banshee": [
+    "Wendigo": [
         {
-            "pergunta": "A Banshee pertence principalmente ao folclore de qual região?",
+            "pergunta": "O Wendigo está ligado principalmente às tradições de povos indígenas de qual região?",
             "alternativas": [
-                "Irlanda",
-                "Egito",
-                "Japão"
+                "América do Norte",
+                "Norte da África",
+                "Sul da Europa"
             ],
             "correta": 0
         },
         {
-            "pergunta": "A Banshee é mais conhecida por emitir qual tipo de som?",
+            "pergunta": "Em muitas histórias, o Wendigo é associado principalmente a:",
             "alternativas": [
-                "Uma risada alta",
-                "Um lamento ou grito assustador",
-                "Um canto alegre"
+                "Ganância e fome insaciável",
+                "Controle do fogo",
+                "Proteção dos oceanos"
             ],
-            "correta": 1
+            "correta": 0
         },
         {
-            "pergunta": "Segundo a lenda, ouvir a Banshee costuma ser sinal de:",
+            "pergunta": "Nas representações modernas de terror, o Wendigo costuma aparecer como:",
             "alternativas": [
-                "Boa sorte",
-                "Chuva forte",
-                "Morte ou tragédia próxima"
+                "Uma criatura assustadora das florestas",
+                "Um espírito do deserto",
+                "Um monstro marinho"
             ],
-            "correta": 2
+            "correta": 0
         },
     ],
 
-    "Gárgula": [
+    "Cavaleiro sem Cabeça": [
         {
-            "pergunta": "As gárgulas são tradicionalmente vistas em qual tipo de construção?",
+            "pergunta": "O Cavaleiro sem Cabeça ficou especialmente famoso em qual história?",
             "alternativas": [
-                "Igrejas e catedrais",
-                "Navios piratas",
-                "Pirâmides"
+                "A Lenda do Cavaleiro sem Cabeça",
+                "Drácula",
+                "Frankenstein"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Além do aspecto assustador, as gárgulas tinham originalmente qual função prática?",
+            "pergunta": "Na história de Sleepy Hollow, o Cavaleiro é associado a:",
             "alternativas": [
-                "Iluminar corredores",
-                "Escoar água da chuva",
-                "Tocar sinos"
+                "Um soldado que perdeu a cabeça",
+                "Um rei amaldiçoado",
+                "Um pirata fantasma"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Qual objeto o Cavaleiro sem Cabeça costuma carregar ou lançar em versões famosas da lenda?",
+            "alternativas": [
+                "Um espelho",
+                "Uma abóbora",
+                "Um sino"
+            ],
+            "correta": 1
+        },
+    ],
+
+    "Pennywise": [
+        {
+            "pergunta": "Pennywise aparece principalmente na obra:",
+            "alternativas": [
+                "It: A Coisa",
+                "O Iluminado",
+                "Carrie"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Quem criou o personagem Pennywise?",
+            "alternativas": [
+                "Stephen King",
+                "Bram Stoker",
+                "H. P. Lovecraft"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Pennywise costuma assumir a forma de palhaço principalmente para:",
+            "alternativas": [
+                "Assustar e atrair suas vítimas",
+                "Trabalhar em um circo",
+                "Proteger crianças"
+            ],
+            "correta": 0
+        },
+    ],
+
+    "Freddy Krueger": [
+        {
+            "pergunta": "Freddy Krueger aparece na franquia:",
+            "alternativas": [
+                "Sexta-Feira 13",
+                "A Hora do Pesadelo",
+                "Halloween"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Na ficção, gárgulas muitas vezes são retratadas como criaturas de:",
+            "pergunta": "Freddy ataca principalmente suas vítimas enquanto elas estão:",
             "alternativas": [
-                "Fogo vivo",
-                "Névoa",
-                "Pedra"
+                "Dormindo",
+                "Dirigindo",
+                "Nadando"
             ],
-            "correta": 2
+            "correta": 0
+        },
+        {
+            "pergunta": "Qual objeto é uma das marcas mais famosas de Freddy Krueger?",
+            "alternativas": [
+                "Uma luva com lâminas",
+                "Uma motosserra",
+                "Um machado dourado"
+            ],
+            "correta": 0
+        },
+    ],
+
+    "Jason Voorhees": [
+        {
+            "pergunta": "Jason Voorhees é personagem de qual franquia de terror?",
+            "alternativas": [
+                "Sexta-Feira 13",
+                "Pânico",
+                "A Hora do Pesadelo"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Qual item ficou fortemente associado ao visual de Jason?",
+            "alternativas": [
+                "Uma máscara de hóquei",
+                "Uma cartola",
+                "Um capacete romano"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Qual local é muito associado às histórias de Jason Voorhees?",
+            "alternativas": [
+                "Camp Crystal Lake",
+                "Elm Street",
+                "Hotel Overlook"
+            ],
+            "correta": 0
         },
     ],
 
 }
-
 TEMA_IMAGENS = {
-    "Cerberus": "imagens_temas/cerberus.png",
-    "Banshee": "imagens_temas/banshee.png",
-    "Gárgula": "imagens_temas/gargula.png",
+    "Quimera": "imagens_temas/quimera.png",
+    "Wendigo": "imagens_temas/wendigo.png",
+    "Cavaleiro sem Cabeça": "imagens_temas/cavaleiro_sem_cabeca.png",
+    "Pennywise": "imagens_temas/pennywise.png",
+    "Freddy Krueger": "imagens_temas/freddy_krueger.png",
+    "Jason Voorhees": "imagens_temas/jason_voorhees.png",
 }
 
 # ------------------------------------------------------------
