@@ -47,219 +47,122 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
 QUIZZES = {
 
-    "Nosferatu": [
-        {"pergunta": "Qual é o nome do vampiro do filme Nosferatu de 1922?", "alternativas": ["Conde Orlok", "Drácula", "Van Helsing"], "correta": 0},
-        {"pergunta": "Nosferatu, lançado em 1922, pertence a qual tipo de cinema?", "alternativas": ["Cinema falado", "Cinema mudo", "Cinema em 3D"], "correta": 1},
-        {"pergunta": "Nosferatu é uma criatura de qual tipo?", "alternativas": ["Lobisomem", "Fantasma", "Vampiro"], "correta": 2},
+    "Nuckelavee": [
+        {
+            "pergunta": "O Nuckelavee pertence ao folclore de qual região?",
+            "alternativas": ["Ilhas Órcades", "México", "Japão"],
+            "correta": 0
+        },
+        {
+            "pergunta": "O Nuckelavee é geralmente descrito como uma mistura assustadora de cavalo e quê?",
+            "alternativas": ["Águia", "Homem", "Peixe"],
+            "correta": 1
+        },
+        {
+            "pergunta": "Qual característica física é frequentemente atribuída ao Nuckelavee?",
+            "alternativas": ["Asas de borboleta", "Corpo coberto de penas", "Ausência de pele"],
+            "correta": 2
+        },
     ],
 
-    "Dullahan": [
-        {"pergunta": "O Dullahan pertence principalmente ao folclore de qual país?", "alternativas": ["Irlanda", "Japão", "Brasil"], "correta": 0},
-        {"pergunta": "Qual característica torna o Dullahan facilmente reconhecível?", "alternativas": ["Possui três braços", "É um cavaleiro sem cabeça", "Tem asas de dragão"], "correta": 1},
-        {"pergunta": "Segundo as lendas, o Dullahan costuma viajar montado em quê?", "alternativas": ["Lobo", "Dragão", "Cavalo"], "correta": 2},
+    "Selkie": [
+        {
+            "pergunta": "A Selkie é uma criatura lendária associada principalmente a qual animal?",
+            "alternativas": ["Foca", "Lobo", "Corvo"],
+            "correta": 0
+        },
+        {
+            "pergunta": "As lendas das Selkies são especialmente conhecidas em qual região?",
+            "alternativas": ["Deserto do Saara", "Escócia e Irlanda", "Brasil Central"],
+            "correta": 1
+        },
+        {
+            "pergunta": "Segundo a lenda, uma Selkie pode assumir forma humana ao fazer o quê?",
+            "alternativas": ["Entrar no fogo", "Cantar para a Lua", "Retirar sua pele de foca"],
+            "correta": 2
+        },
     ],
 
-    "Mothman": [
-        {"pergunta": "Em qual estado dos Estados Unidos ficaram famosos os relatos do Mothman?", "alternativas": ["Virgínia Ocidental", "Flórida", "Califórnia"], "correta": 0},
-        {"pergunta": "Qual cidade ficou associada aos relatos do Mothman na década de 1960?", "alternativas": ["Salem", "Point Pleasant", "Roswell"], "correta": 1},
-        {"pergunta": "Qual característica é frequentemente atribuída ao Mothman?", "alternativas": ["Chifres dourados", "Cauda de peixe", "Olhos vermelhos brilhantes"], "correta": 2},
+    "Tengu": [
+        {
+            "pergunta": "O Tengu pertence ao folclore de qual país?",
+            "alternativas": ["Japão", "Egito", "Canadá"],
+            "correta": 0
+        },
+        {
+            "pergunta": "O Tengu é frequentemente representado com características humanas e de qual criatura?",
+            "alternativas": ["Peixe", "Ave", "Serpente"],
+            "correta": 1
+        },
+        {
+            "pergunta": "Qual traço físico é muito associado a algumas representações do Tengu?",
+            "alternativas": ["Chifres dourados", "Cauda de escorpião", "Nariz muito comprido"],
+            "correta": 2
+        },
     ],
 
-    "Jackalope": [
-        {"pergunta": "O Jackalope é normalmente representado como qual animal?", "alternativas": ["Coelho com chifres", "Cavalo com asas", "Urso com cauda de peixe"], "correta": 0},
-        {"pergunta": "Os chifres do Jackalope lembram os de qual animal?", "alternativas": ["Elefante", "Antílope", "Golfinho"], "correta": 1},
-        {"pergunta": "O Jackalope pertence principalmente ao folclore de qual região?", "alternativas": ["África Central", "Sudeste Asiático", "América do Norte"], "correta": 2},
+    "Kappa": [
+        {
+            "pergunta": "O Kappa pertence ao folclore de qual país?",
+            "alternativas": ["Japão", "Índia", "Chile"],
+            "correta": 0
+        },
+        {
+            "pergunta": "O Kappa é tradicionalmente associado a qual ambiente?",
+            "alternativas": ["Montanhas nevadas", "Rios e lagos", "Desertos"],
+            "correta": 1
+        },
+        {
+            "pergunta": "Qual detalhe é marcante na aparência do Kappa?",
+            "alternativas": ["Olhos vermelhos brilhantes", "Asas gigantes", "Uma cavidade com água no topo da cabeça"],
+            "correta": 2
+        },
     ],
 
-    "Basilisco": [
-        {"pergunta": "O Basilisco aparece principalmente em lendas de qual região?", "alternativas": ["Europa", "Austrália", "Antártida"], "correta": 0},
-        {"pergunta": "Qual poder é frequentemente atribuído ao olhar do Basilisco?", "alternativas": ["Curar feridas", "Ser mortal", "Fazer chover"], "correta": 1},
-        {"pergunta": "Nas lendas medievais, o Basilisco costuma ter características de serpente e de qual outro animal?", "alternativas": ["Elefante", "Cavalo", "Galo"], "correta": 2},
+    "Roc": [
+        {
+            "pergunta": "O Roc é descrito nas lendas como que tipo de criatura?",
+            "alternativas": ["Ave gigante", "Cavalo marinho", "Réptil de fogo"],
+            "correta": 0
+        },
+        {
+            "pergunta": "O Roc aparece em histórias ligadas principalmente a qual tradição?",
+            "alternativas": ["Folclore asteca", "Contos árabes e orientais", "Lendas escandinavas"],
+            "correta": 1
+        },
+        {
+            "pergunta": "Nas lendas, o Roc era tão grande que podia carregar o quê?",
+            "alternativas": ["Flores inteiras", "Montanhas pequenas", "Elefantes"],
+            "correta": 2
+        },
     ],
 
-    "Hidra de Lerna": [
-        {"pergunta": "A Hidra de Lerna pertence a qual mitologia?", "alternativas": ["Grega", "Nórdica", "Egípcia"], "correta": 0},
-        {"pergunta": "Qual herói enfrentou a Hidra como parte de seus trabalhos?", "alternativas": ["Aquiles", "Hércules", "Ulisses"], "correta": 1},
-        {"pergunta": "O que acontecia com muitas cabeças da Hidra quando eram cortadas?", "alternativas": ["Viravam pedra", "Desapareciam para sempre", "Podiam crescer novamente"], "correta": 2},
-    ],
-
-    "Ciclope": [
-        {"pergunta": "Qual é a característica física mais famosa de um Ciclope?", "alternativas": ["Possuir um único olho", "Ter quatro braços", "Não possuir pernas"], "correta": 0},
-        {"pergunta": "Qual Ciclope aparece na Odisseia de Homero?", "alternativas": ["Cronos", "Polifemo", "Orfeu"], "correta": 1},
-        {"pergunta": "Os Ciclopes pertencem a qual mitologia?", "alternativas": ["Japonesa", "Asteca", "Grega"], "correta": 2},
-    ],
-
-    "Sereia": [
-        {"pergunta": "Como a sereia é normalmente representada nas lendas modernas?", "alternativas": ["Metade mulher e metade peixe", "Metade leão e metade águia", "Metade cavalo e metade homem"], "correta": 0},
-        {"pergunta": "As sereias são tradicionalmente associadas a qual ambiente?", "alternativas": ["Desertos", "Mares e oceanos", "Vulcões"], "correta": 1},
-        {"pergunta": "Nas histórias, qual habilidade costuma ser atribuída às sereias?", "alternativas": ["Controlar máquinas", "Respirar fogo", "Encantar com sua voz"], "correta": 2},
-    ],
-
-    "Harpia": [
-        {"pergunta": "As Harpias pertencem principalmente a qual mitologia?", "alternativas": ["Grega", "Maia", "Chinesa"], "correta": 0},
-        {"pergunta": "As Harpias são geralmente representadas como uma mistura de mulher e quê?", "alternativas": ["Peixe", "Ave", "Cavalo"], "correta": 1},
-        {"pergunta": "Qual característica permite às Harpias voar?", "alternativas": ["Escamas", "Nadadeiras", "Asas"], "correta": 2},
-    ],
-
-    "Grifo": [
-        {"pergunta": "O corpo do Grifo é geralmente semelhante ao de qual animal?", "alternativas": ["Leão", "Cobra", "Tubarão"], "correta": 0},
-        {"pergunta": "A cabeça e as asas do Grifo lembram qual animal?", "alternativas": ["Cervo", "Águia", "Jacaré"], "correta": 1},
-        {"pergunta": "Nas lendas, os Grifos são frequentemente associados à proteção de quê?", "alternativas": ["Oceanos", "Tempestades", "Tesouros"], "correta": 2},
-    ],
-
-    "Fênix": [
-        {"pergunta": "Qual elemento é mais associado à Fênix?", "alternativas": ["Fogo", "Gelo", "Água"], "correta": 0},
-        {"pergunta": "A Fênix é famosa por renascer de quê?", "alternativas": ["Pedras", "Cinzas", "Água do mar"], "correta": 1},
-        {"pergunta": "A Fênix é normalmente representada como qual tipo de animal?", "alternativas": ["Felino", "Réptil", "Ave"], "correta": 2},
-    ],
-
-    "Pegasus": [
-        {"pergunta": "Pegasus pertence a qual mitologia?", "alternativas": ["Grega", "Egípcia", "Celta"], "correta": 0},
-        {"pergunta": "Pegasus é representado como um cavalo com quê?", "alternativas": ["Chifres", "Asas", "Escamas"], "correta": 1},
-        {"pergunta": "Segundo a mitologia, Pegasus surgiu após a morte de qual personagem?", "alternativas": ["Hera", "Atena", "Medusa"], "correta": 2},
-    ],
-
-    "Yeti": [
-        {"pergunta": "Em qual região do mundo o Yeti é tradicionalmente situado?", "alternativas": ["Himalaia", "Amazônia", "Saara"], "correta": 0},
-        {"pergunta": "Qual outro nome ficou popularmente associado ao Yeti?", "alternativas": ["Homem do Pântano", "Abominável Homem das Neves", "Homem do Mar"], "correta": 1},
-        {"pergunta": "O Yeti costuma ser descrito como uma criatura grande coberta por quê?", "alternativas": ["Penas coloridas", "Escamas", "Pelos"], "correta": 2},
-    ],
-
-    "Pé-Grande": [
-        {"pergunta": "O Pé-Grande é associado principalmente a qual região?", "alternativas": ["América do Norte", "Antártida", "Norte da África"], "correta": 0},
-        {"pergunta": "Qual outro nome é usado para o Pé-Grande?", "alternativas": ["Kraken", "Sasquatch", "Kelpie"], "correta": 1},
-        {"pergunta": "Que tipo de vestígio costuma aparecer nas histórias sobre o Pé-Grande?", "alternativas": ["Conchas gigantes", "Penas azuis", "Pegadas enormes"], "correta": 2},
-    ],
-
-    "Chupacabra": [
-        {"pergunta": "O Chupacabra ficou famoso principalmente em histórias de qual região?", "alternativas": ["América Latina", "Escandinávia", "Oceania"], "correta": 0},
-        {"pergunta": "Segundo as lendas, o Chupacabra atacaria principalmente o quê?", "alternativas": ["Árvores", "Animais de criação", "Barcos"], "correta": 1},
-        {"pergunta": "O nome Chupacabra está relacionado especialmente a qual animal?", "alternativas": ["Cavalo", "Porco", "Cabra"], "correta": 2},
-    ],
-
-    "Nessie – Monstro do Lago Ness": [
-        {"pergunta": "Em qual país fica o Lago Ness?", "alternativas": ["Escócia", "Itália", "México"], "correta": 0},
-        {"pergunta": "Qual apelido é dado ao suposto monstro do Lago Ness?", "alternativas": ["Maggie", "Nessie", "Bessie"], "correta": 1},
-        {"pergunta": "O Monstro do Lago Ness seria uma criatura de qual ambiente?", "alternativas": ["Deserto", "Floresta", "Aquático"], "correta": 2},
-    ],
-
-    "Monstro de Flatwoods": [
-        {"pergunta": "Em qual estado americano ocorreu o famoso relato do Monstro de Flatwoods em 1952?", "alternativas": ["Virgínia Ocidental", "Texas", "Alasca"], "correta": 0},
-        {"pergunta": "O relato do Monstro de Flatwoods ficou associado à observação de quê no céu?", "alternativas": ["Um arco-íris", "Um objeto luminoso", "Um eclipse total"], "correta": 1},
-        {"pergunta": "O Monstro de Flatwoods costuma aparecer ligado a histórias sobre quê?", "alternativas": ["Piratas", "Vampiros", "OVNIs"], "correta": 2},
-    ],
-
-    "Kelpie": [
-        {"pergunta": "O Kelpie pertence principalmente ao folclore de qual país?", "alternativas": ["Escócia", "Brasil", "Egito"], "correta": 0},
-        {"pergunta": "O Kelpie costuma assumir a forma de qual animal?", "alternativas": ["Águia", "Cavalo", "Leão"], "correta": 1},
-        {"pergunta": "O Kelpie é tradicionalmente associado a qual ambiente?", "alternativas": ["Desertos", "Montanhas secas", "Rios e lagos"], "correta": 2},
-    ],
-
-    "Golem": [
-        {"pergunta": "O Golem está ligado principalmente a qual tradição cultural?", "alternativas": ["Judaica", "Japonesa", "Inca"], "correta": 0},
-        {"pergunta": "Nas histórias, de qual material o Golem costuma ser criado?", "alternativas": ["Gelo", "Barro ou argila", "Vidro"], "correta": 1},
-        {"pergunta": "Qual cidade europeia ficou especialmente associada à lenda do Golem?", "alternativas": ["Madri", "Londres", "Praga"], "correta": 2},
-    ],
-
-    "Djinn": [
-        {"pergunta": "Os Djinn aparecem principalmente em tradições de qual região?", "alternativas": ["Oriente Médio", "Escandinávia", "América do Sul"], "correta": 0},
-        {"pergunta": "Na tradição islâmica, os jinn são descritos como criados de quê?", "alternativas": ["Água congelada", "Fogo sem fumaça", "Pedra"], "correta": 1},
-        {"pergunta": "Em histórias populares, um Djinn pode ser associado a qual objeto?", "alternativas": ["Espada", "Escudo", "Lâmpada"], "correta": 2},
-    ],
-
-    "Leprechaun": [
-        {"pergunta": "O Leprechaun pertence ao folclore de qual país?", "alternativas": ["Irlanda", "Canadá", "Grécia"], "correta": 0},
-        {"pergunta": "Qual profissão é tradicionalmente associada aos Leprechauns nas lendas?", "alternativas": ["Pescador", "Sapateiro", "Ferreiro"], "correta": 1},
-        {"pergunta": "Nas histórias populares, o Leprechaun costuma guardar o quê?", "alternativas": ["Livros antigos", "Espadas", "Ouro"], "correta": 2},
-    ],
-
-    "Boitatá": [
-        {"pergunta": "O Boitatá pertence ao folclore de qual país?", "alternativas": ["Brasil", "Canadá", "Índia"], "correta": 0},
-        {"pergunta": "O Boitatá costuma ser representado como qual criatura?", "alternativas": ["Cavalo de gelo", "Serpente de fogo", "Ave de pedra"], "correta": 1},
-        {"pergunta": "Nas lendas, o Boitatá é frequentemente associado à proteção de quê?", "alternativas": ["Castelos", "Navios", "Matas e campos"], "correta": 2},
-    ],
-
-    "Iara": [
-        {"pergunta": "A Iara pertence ao folclore de qual país?", "alternativas": ["Brasil", "Itália", "China"], "correta": 0},
-        {"pergunta": "A Iara é especialmente associada a qual ambiente?", "alternativas": ["Deserto", "Rios", "Vulcões"], "correta": 1},
-        {"pergunta": "Qual habilidade é frequentemente atribuída à Iara nas lendas?", "alternativas": ["Voar", "Respirar fogo", "Encantar com o canto"], "correta": 2},
-    ],
-
-    "Curupira": [
-        {"pergunta": "Qual característica física é famosa no Curupira?", "alternativas": ["Pés virados para trás", "Três olhos", "Asas enormes"], "correta": 0},
-        {"pergunta": "Qual cor de cabelo é frequentemente atribuída ao Curupira?", "alternativas": ["Azul", "Vermelho", "Branco"], "correta": 1},
-        {"pergunta": "O Curupira é conhecido nas lendas como protetor de quê?", "alternativas": ["Oceanos", "Cidades", "Florestas"], "correta": 2},
-    ],
-
-    "Mula-sem-Cabeça": [
-        {"pergunta": "A Mula-sem-Cabeça pertence principalmente ao folclore de qual país?", "alternativas": ["Brasil", "Japão", "Noruega"], "correta": 0},
-        {"pergunta": "Qual animal aparece na lenda da Mula-sem-Cabeça?", "alternativas": ["Lobo", "Mula", "Águia"], "correta": 1},
-        {"pergunta": "O que costuma aparecer no lugar da cabeça da criatura?", "alternativas": ["Uma coroa", "Uma nuvem", "Chamas"], "correta": 2},
-    ],
-
-    "Mapinguari": [
-        {"pergunta": "O Mapinguari está associado principalmente a qual região brasileira?", "alternativas": ["Amazônia", "Pampas", "Pantanal exclusivamente"], "correta": 0},
-        {"pergunta": "O Mapinguari costuma ser descrito como uma criatura de qual porte?", "alternativas": ["Muito pequena", "Grande e peluda", "Do tamanho de um inseto"], "correta": 1},
-        {"pergunta": "O Mapinguari pertence principalmente a qual tipo de tradição?", "alternativas": ["Astronomia", "Tecnologia", "Folclore amazônico"], "correta": 2},
-    ],
-
-    "Corpo-Seco": [
-        {"pergunta": "O Corpo-Seco pertence principalmente ao folclore de qual país?", "alternativas": ["Brasil", "Austrália", "Rússia"], "correta": 0},
-        {"pergunta": "Nas lendas, o Corpo-Seco é geralmente descrito como o quê?", "alternativas": ["Uma ave gigante", "Um morto amaldiçoado", "Um peixe encantado"], "correta": 1},
-        {"pergunta": "O nome Corpo-Seco está relacionado à aparência de quê?", "alternativas": ["Uma árvore florida", "Uma nuvem", "Um corpo ressequido"], "correta": 2},
-    ],
-
-    "Pisadeira": [
-        {"pergunta": "A Pisadeira pertence ao folclore de qual país?", "alternativas": ["Brasil", "Islândia", "Japão"], "correta": 0},
-        {"pergunta": "Segundo as histórias, a Pisadeira costuma aparecer quando a pessoa está fazendo o quê?", "alternativas": ["Nadando", "Dormindo", "Correndo"], "correta": 1},
-        {"pergunta": "A lenda da Pisadeira é frequentemente associada a qual sensação?", "alternativas": ["Cócegas", "Fome", "Pressão sobre o peito"], "correta": 2},
-    ],
-
-    "Matinta Pereira": [
-        {"pergunta": "A Matinta Pereira é especialmente conhecida no folclore de qual região brasileira?", "alternativas": ["Amazônia", "Sul", "Centro-Oeste apenas"], "correta": 0},
-        {"pergunta": "Qual som é muito associado à Matinta Pereira?", "alternativas": ["Tambor", "Assobio", "Sino"], "correta": 1},
-        {"pergunta": "Nas histórias, a Matinta pode assumir a forma de quê?", "alternativas": ["Peixe", "Cavalo", "Ave"], "correta": 2},
-    ],
-
-    "Cabra-Cabriola": [
-        {"pergunta": "A Cabra-Cabriola aparece em tradições populares de Portugal e de qual outro país?", "alternativas": ["Brasil", "Canadá", "Japão"], "correta": 0},
-        {"pergunta": "A aparência da Cabra-Cabriola é associada principalmente a qual animal?", "alternativas": ["Peixe", "Cabra", "Águia"], "correta": 1},
-        {"pergunta": "Nas histórias populares, a Cabra-Cabriola era usada principalmente para fazer o quê?", "alternativas": ["Prever o tempo", "Ensinar matemática", "Assustar crianças"], "correta": 2},
+    "Baba Yaga": [
+        {
+            "pergunta": "Baba Yaga é uma figura lendária ligada ao folclore de qual região?",
+            "alternativas": ["Leste Europeu", "Polinésia", "África do Sul"],
+            "correta": 0
+        },
+        {
+            "pergunta": "Baba Yaga é geralmente descrita como o quê?",
+            "alternativas": ["Uma sereia encantada", "Uma velha bruxa", "Uma fada da floresta"],
+            "correta": 1
+        },
+        {
+            "pergunta": "Segundo a lenda, a casa de Baba Yaga se apoia sobre quê?",
+            "alternativas": ["Pedras flutuantes", "Rodas de madeira", "Pernas de galinha"],
+            "correta": 2
+        },
     ],
 
 }
-
-TEMA_IMAGENS = {
-    "Nosferatu": "imagens_temas/nosferatu.png",
-    "Dullahan": "imagens_temas/dullahan.png",
-    "Mothman": "imagens_temas/mothman.png",
-    "Jackalope": "imagens_temas/jackalope.png",
-    "Basilisco": "imagens_temas/basilisco.png",
-    "Hidra de Lerna": "imagens_temas/hidra_de_lerna.png",
-    "Ciclope": "imagens_temas/ciclope.png",
-    "Sereia": "imagens_temas/sereia.png",
-    "Harpia": "imagens_temas/harpia.png",
-    "Grifo": "imagens_temas/grifo.png",
-    "Fênix": "imagens_temas/fenix.png",
-    "Pegasus": "imagens_temas/pegasus.png",
-    "Yeti": "imagens_temas/yeti.png",
-    "Pé-Grande": "imagens_temas/pe_grande.png",
-    "Chupacabra": "imagens_temas/chupacabra.png",
-    "Nessie – Monstro do Lago Ness": "imagens_temas/nessie.png",
-    "Monstro de Flatwoods": "imagens_temas/monstro_flatwoods.png",
-    "Kelpie": "imagens_temas/kelpie.png",
-    "Golem": "imagens_temas/golem.png",
-    "Djinn": "imagens_temas/djinn.png",
-    "Leprechaun": "imagens_temas/leprechaun.png",
-    "Boitatá": "imagens_temas/boitata.png",
-    "Iara": "imagens_temas/iara.png",
-    "Curupira": "imagens_temas/curupira.png",
-    "Mula-sem-Cabeça": "imagens_temas/mula_sem_cabeca.png",
-    "Mapinguari": "imagens_temas/mapinguari.png",
-    "Corpo-Seco": "imagens_temas/corpo_seco.png",
-    "Pisadeira": "imagens_temas/pisadeira.png",
-    "Matinta Pereira": "imagens_temas/matinta_pereira.png",
-    "Cabra-Cabriola": "imagens_temas/cabra_cabriola.png",
+TEMA_IMAGENS_NOVOS = {
+    "Nuckelavee": "imagens_temas/nuckelavee.png",
+    "Selkie": "imagens_temas/selkie.png",
+    "Tengu": "imagens_temas/tengu.png",
+    "Kappa": "imagens_temas/kappa.png",
+    "Roc": "imagens_temas/roc.png",
+    "Baba Yaga": "imagens_temas/baba_yaga.png",
 }
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
