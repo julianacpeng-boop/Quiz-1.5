@@ -45,197 +45,104 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 # - placar final X/X.
 # ============================================================
 
-
 QUIZZES = {
 
-    "Godzilla": [
+    "Mercado Livre": [
         {
-            "pergunta": "Godzilla é mais conhecido por ser qual tipo de criatura?",
+            "pergunta": "Em que ano o Mercado Livre foi criado?",
             "alternativas": [
-                "Um tubarão gigante",
-                "Um monstro gigante",
-                "Um robô alienígena"
+                "2005",
+                "1999",
+                "2010"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Godzilla surgiu originalmente em qual país?",
+            "pergunta": "Em qual cidade o Mercado Livre começou sua história?",
             "alternativas": [
-                "Japão",
-                "Estados Unidos",
-                "México"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Em muitas versões da história, Godzilla está fortemente ligado a:",
-            "alternativas": [
-                "Magia medieval",
-                "Neve eterna",
-                "Radiação"
-            ],
-            "correta": 2
-        },
-    ],
-
-    "King Kong": [
-        {
-            "pergunta": "King Kong é retratado principalmente como um:",
-            "alternativas": [
-                "Gorila gigante",
-                "Dinossauro alado",
-                "Monstro marinho"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Qual é o lugar mais associado à origem de King Kong?",
-            "alternativas": [
-                "Ilha da Caveira",
-                "Atlântida",
-                "Monte Olimpo"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Em uma das cenas mais famosas, King Kong sobe em qual construção?",
-            "alternativas": [
-                "Torre Eiffel",
-                "Empire State Building",
-                "Big Ben"
-            ],
-            "correta": 1
-        },
-    ],
-
-    "Alien": [
-        {
-            "pergunta": "O Alien é mais associado a qual tipo de história?",
-            "alternativas": [
-                "Romance",
-                "Faroeste",
-                "Ficção científica e terror"
+                "São Paulo",
+                "Santiago",
+                "Buenos Aires"
             ],
             "correta": 2
         },
         {
-            "pergunta": "Em muitas obras, o Alien é apresentado como uma criatura:",
+            "pergunta": "Quem é o fundador do Mercado Livre?",
             "alternativas": [
-                "Extraterrestre",
-                "Aquática",
-                "Medieval"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "O Alien costuma ser retratado como uma ameaça em qual ambiente?",
-            "alternativas": [
-                "Castelos antigos",
-                "Naves e estações espaciais",
-                "Florestas tropicais"
-            ],
-            "correta": 1
-        },
-    ],
-
-    "Cleópatra": [
-        {
-            "pergunta": "Cleópatra foi uma figura histórica ligada principalmente a qual civilização?",
-            "alternativas": [
-                "Egito",
-                "Roma",
-                "Pérsia"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Cleópatra ficou conhecida principalmente por ser:",
-            "alternativas": [
-                "Rainha",
-                "Pintora",
-                "Cientista"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Cleópatra viveu durante qual período histórico?",
-            "alternativas": [
-                "Idade Média",
-                "Antiguidade",
-                "Revolução Industrial"
-            ],
-            "correta": 1
-        },
-    ],
-
-    "Joana d’Arc": [
-        {
-            "pergunta": "Joana d’Arc é uma personagem histórica ligada a qual país?",
-            "alternativas": [
-                "França",
-                "Inglaterra",
-                "Itália"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Joana d’Arc ficou famosa por sua participação em qual conflito?",
-            "alternativas": [
-                "Guerra Fria",
-                "Guerra dos Cem Anos",
-                "Primeira Guerra Mundial"
-            ],
-            "correta": 1
-        },
-        {
-            "pergunta": "Joana d’Arc ficou conhecida principalmente por sua atuação:",
-            "alternativas": [
-                "Militar e religiosa",
-                "Científica",
-                "Artística"
+                "Marcos Galperin",
+                "Jeff Bezos",
+                "Reed Hastings"
             ],
             "correta": 0
         },
     ],
 
-    "Napoleão Bonaparte": [
+    "A Fazenda 18": [
         {
-            "pergunta": "Napoleão Bonaparte foi um líder histórico de qual país?",
+            "pergunta": "Quem apresenta A Fazenda 18?",
             "alternativas": [
-                "França",
-                "Alemanha",
-                "Portugal"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Napoleão ficou conhecido principalmente por ser:",
-            "alternativas": [
-                "Navegador",
-                "Líder militar e imperador",
-                "Filósofo"
+                "Sabrina Sato",
+                "Adriane Galisteu",
+                "Ana Hickmann"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Qual batalha é muito associada à derrota final de Napoleão?",
+            "pergunta": "Quantos participantes começaram A Fazenda 18?",
             "alternativas": [
-                "Waterloo",
-                "Hastings",
-                "Lepanto"
+                "18",
+                "20",
+                "22"
+            ],
+            "correta": 2
+        },
+        {
+            "pergunta": "Qual é o prêmio principal de A Fazenda 18?",
+            "alternativas": [
+                "R$ 2 milhões",
+                "R$ 1 milhão",
+                "R$ 3 milhões"
+            ],
+            "correta": 0
+        },
+    ],
+
+    "Rock in Rio 2026": [
+        {
+            "pergunta": "Qual banda foi a principal atração do Palco Mundo em 04.SET de 2026?",
+            "alternativas": [
+                "Maroon 5",
+                "Foo Fighters",
+                "Twenty One Pilots"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Quantos dias teve o Rock in Rio 2026?",
+            "alternativas": [
+                "5 dias",
+                "6 dias",
+                "7 dias"
+            ],
+            "correta": 2
+        },
+        {
+            "pergunta": "Onde aconteceu o Rock in Rio 2026?",
+            "alternativas": [
+                "Cidade do Rock, no Rio de Janeiro",
+                "Allianz Parque, em São Paulo",
+                "Mineirão, em Belo Horizonte"
             ],
             "correta": 0
         },
     ],
 
 }
+                
 TEMA_IMAGENS = {
-    "Godzilla": "imagens_temas/godzilla.png",
-    "King Kong": "imagens_temas/king_kong.png",
-    "Alien": "imagens_temas/alien.png",
-    "Cleópatra": "imagens_temas/cleopatra.png",
-    "Joana d’Arc": "imagens_temas/joana_darc.png",
-    "Napoleão Bonaparte": "imagens_temas/napoleao_bonaparte.png",
+    "Mercado Livre": "imagens_temas/mercado_livre.png",
+    "A Fazenda 18": "imagens_temas/a_fazenda_18.png",
+    "Rock in Rio 2026": "imagens_temas/rock_in_rio_2026.png",
 }
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
