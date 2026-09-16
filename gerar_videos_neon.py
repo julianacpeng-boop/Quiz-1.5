@@ -134,94 +134,183 @@ QUIZZES = {
                 "Um sino"
             ],
             "correta": 1
-        },
-    ],
+QUIZZES = {
 
-    "Pennywise": [
+    "Godzilla": [
         {
-            "pergunta": "Pennywise aparece principalmente na obra:",
+            "pergunta": "Godzilla é mais conhecido por ser qual tipo de criatura?",
             "alternativas": [
-                "It: A Coisa",
-                "O Iluminado",
-                "Carrie"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Quem criou o personagem Pennywise?",
-            "alternativas": [
-                "Stephen King",
-                "Bram Stoker",
-                "H. P. Lovecraft"
-            ],
-            "correta": 0
-        },
-        {
-            "pergunta": "Pennywise costuma assumir a forma de palhaço principalmente para:",
-            "alternativas": [
-                "Assustar e atrair suas vítimas",
-                "Trabalhar em um circo",
-                "Proteger crianças"
-            ],
-            "correta": 0
-        },
-    ],
-
-    "Freddy Krueger": [
-        {
-            "pergunta": "Freddy Krueger aparece na franquia:",
-            "alternativas": [
-                "Sexta-Feira 13",
-                "A Hora do Pesadelo",
-                "Halloween"
+                "Um tubarão gigante",
+                "Um monstro gigante",
+                "Um robô alienígena"
             ],
             "correta": 1
         },
         {
-            "pergunta": "Freddy ataca principalmente suas vítimas enquanto elas estão:",
+            "pergunta": "Godzilla surgiu originalmente em qual país?",
             "alternativas": [
-                "Dormindo",
-                "Dirigindo",
-                "Nadando"
+                "Japão",
+                "Estados Unidos",
+                "México"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Qual objeto é uma das marcas mais famosas de Freddy Krueger?",
+            "pergunta": "Em muitas versões da história, Godzilla está fortemente ligado a:",
             "alternativas": [
-                "Uma luva com lâminas",
-                "Uma motosserra",
-                "Um machado dourado"
+                "Magia medieval",
+                "Neve eterna",
+                "Radiação"
+            ],
+            "correta": 2
+        },
+    ],
+
+    "King Kong": [
+        {
+            "pergunta": "King Kong é retratado principalmente como um:",
+            "alternativas": [
+                "Gorila gigante",
+                "Dinossauro alado",
+                "Monstro marinho"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Qual é o lugar mais associado à origem de King Kong?",
+            "alternativas": [
+                "Ilha da Caveira",
+                "Atlântida",
+                "Monte Olimpo"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Em uma das cenas mais famosas, King Kong sobe em qual construção?",
+            "alternativas": [
+                "Torre Eiffel",
+                "Empire State Building",
+                "Big Ben"
+            ],
+            "correta": 1
+        },
+    ],
+
+    "Alien": [
+        {
+            "pergunta": "O Alien é mais associado a qual tipo de história?",
+            "alternativas": [
+                "Romance",
+                "Faroeste",
+                "Ficção científica e terror"
+            ],
+            "correta": 2
+        },
+        {
+            "pergunta": "Em muitas obras, o Alien é apresentado como uma criatura:",
+            "alternativas": [
+                "Extraterrestre",
+                "Aquática",
+                "Medieval"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "O Alien costuma ser retratado como uma ameaça em qual ambiente?",
+            "alternativas": [
+                "Castelos antigos",
+                "Naves e estações espaciais",
+                "Florestas tropicais"
+            ],
+            "correta": 1
+        },
+    ],
+
+    "Cleópatra": [
+        {
+            "pergunta": "Cleópatra foi uma figura histórica ligada principalmente a qual civilização?",
+            "alternativas": [
+                "Egito",
+                "Roma",
+                "Pérsia"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Cleópatra ficou conhecida principalmente por ser:",
+            "alternativas": [
+                "Rainha",
+                "Pintora",
+                "Cientista"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Cleópatra viveu durante qual período histórico?",
+            "alternativas": [
+                "Idade Média",
+                "Antiguidade",
+                "Revolução Industrial"
+            ],
+            "correta": 1
+        },
+    ],
+
+    "Joana d’Arc": [
+        {
+            "pergunta": "Joana d’Arc é uma personagem histórica ligada a qual país?",
+            "alternativas": [
+                "França",
+                "Inglaterra",
+                "Itália"
+            ],
+            "correta": 0
+        },
+        {
+            "pergunta": "Joana d’Arc ficou famosa por sua participação em qual conflito?",
+            "alternativas": [
+                "Guerra Fria",
+                "Guerra dos Cem Anos",
+                "Primeira Guerra Mundial"
+            ],
+            "correta": 1
+        },
+        {
+            "pergunta": "Joana d’Arc ficou conhecida principalmente por sua atuação:",
+            "alternativas": [
+                "Militar e religiosa",
+                "Científica",
+                "Artística"
             ],
             "correta": 0
         },
     ],
 
-    "Jason Voorhees": [
+    "Napoleão Bonaparte": [
         {
-            "pergunta": "Jason Voorhees é personagem de qual franquia de terror?",
+            "pergunta": "Napoleão Bonaparte foi um líder histórico de qual país?",
             "alternativas": [
-                "Sexta-Feira 13",
-                "Pânico",
-                "A Hora do Pesadelo"
+                "França",
+                "Alemanha",
+                "Portugal"
             ],
             "correta": 0
         },
         {
-            "pergunta": "Qual item ficou fortemente associado ao visual de Jason?",
+            "pergunta": "Napoleão ficou conhecido principalmente por ser:",
             "alternativas": [
-                "Uma máscara de hóquei",
-                "Uma cartola",
-                "Um capacete romano"
+                "Navegador",
+                "Líder militar e imperador",
+                "Filósofo"
             ],
-            "correta": 0
+            "correta": 1
         },
         {
-            "pergunta": "Qual local é muito associado às histórias de Jason Voorhees?",
+            "pergunta": "Qual batalha é muito associada à derrota final de Napoleão?",
             "alternativas": [
-                "Camp Crystal Lake",
-                "Elm Street",
-                "Hotel Overlook"
+                "Waterloo",
+                "Hastings",
+                "Lepanto"
             ],
             "correta": 0
         },
@@ -229,14 +318,13 @@ QUIZZES = {
 
 }
 TEMA_IMAGENS = {
-    "Quimera": "imagens_temas/quimera.png",
-    "Wendigo": "imagens_temas/wendigo.png",
-    "Cavaleiro sem Cabeça": "imagens_temas/cavaleiro_sem_cabeca.png",
-    "Pennywise": "imagens_temas/pennywise.png",
-    "Freddy Krueger": "imagens_temas/freddy_krueger.png",
-    "Jason Voorhees": "imagens_temas/jason_voorhees.png",
+    "Godzilla": "imagens_temas/godzilla.png",
+    "King Kong": "imagens_temas/king_kong.png",
+    "Alien": "imagens_temas/alien.png",
+    "Cleópatra": "imagens_temas/cleopatra.png",
+    "Joana d’Arc": "imagens_temas/joana_darc.png",
+    "Napoleão Bonaparte": "imagens_temas/napoleao_bonaparte.png",
 }
-
 # ------------------------------------------------------------
 # CONFIGURAÇÃO
 # ------------------------------------------------------------
